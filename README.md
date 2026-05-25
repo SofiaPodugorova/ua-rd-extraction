@@ -271,8 +271,8 @@ values. Any label introduced in future-year batches must be added here.
 - `stage_title` of 5 reports starts with a literal `91` prefix (footnote
   marker not separated from text in the source). One report has
   `stage_number` = `91` instead of the typical 1–5.
-- `performer_phone` of 23 reports contains Ukrainian abbreviations
-  (`т.`, `факс`) mixed with the digits.
+- `performer_phone` of 36 reports contains alphabetic markers mixed with
+  the digits (Ukrainian `т.` / `факс`, Latin `Tel.` / `Fax`, etc.).
 - `customer_edrpou` non-canonical in 62 / 1 516 non-empty rows: 24 with
   trailing period, 16 foreign placeholders (`BY000000`, `US000000`, …),
   22 with non-8-digit length. `performer_edrpou` non-canonical in 4 reports.
@@ -287,5 +287,5 @@ values. Any label introduced in future-year batches must be added here.
 - 9 reports funded in foreign currency use a non-canonical funding-amount
   label; their amounts are captured in `funding_amount_usd` /
   `funding_amount_eur`, kept separate from `funding_amount_kgrn`.
-- `funding_sources` of 165 reports preserves an internal `\n` from a line
+- `funding_sources` of 156 reports preserves an internal `\n` from a line
   wrap in the source form — kept verbatim per the cell-newline contract.
