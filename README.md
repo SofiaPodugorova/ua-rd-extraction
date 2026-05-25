@@ -132,6 +132,33 @@ python extract_rd_data.py \
     --log      "out/run_2017.log"
 ```
 
+## Reviewing the Submission
+
+You don't need to run the pipeline to review it — the prebuilt CSV and the
+sample are already in the repo.
+
+**See the data as a table (no setup required).** The CSVs are written in
+**UTF-8 with BOM** specifically so spreadsheet apps render the Ukrainian
+text correctly on a plain double-click:
+
+- **Excel** (Windows / Mac) — double-click `samples/sample_output.csv`
+  (5 rows, small) or `data/output_2017.csv` (1 518 rows, ~12 MB).
+- **Numbers** (Mac) — same, double-click opens it.
+- **LibreOffice Calc** — same. In the import dialog leave the defaults
+  (separator: comma, encoding: UTF-8) and click OK.
+- **Google Sheets** — *File → Import → Upload* the CSV; pick
+  "Replace spreadsheet" and "Comma" as separator.
+- **GitHub** — clicking the CSV in the GitHub web UI renders the first
+  ~hundreds of rows as a sortable table directly in the browser
+  (no download needed).
+
+`samples/preview.html` is a self-contained HTML view of the 5 sample rows
+— open it in any browser if you don't have a spreadsheet app handy.
+
+**Read the code.** `extract_rd_data.py` is a single annotated file (~660
+lines). Open it in any text editor or in the GitHub web UI. The function
+order mirrors the pipeline: PDF → text → sections → fields → language → CSV.
+
 ## Output Files
 
 ### `data/output_2017.csv`
