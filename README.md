@@ -67,17 +67,20 @@ python extract_rd_data.py                 # full dataset (~1.5–3 min)
 ### Windows — from scratch (PowerShell)
 
 ```powershell
-# 1. Python (skip if `py --version` already prints 3.10+)
+# 1. Python (skip if `python --version` already prints 3.10+)
 #    Either install from https://www.python.org/downloads/windows/
 #    (check "Add python.exe to PATH" during the installer), or:
 winget install --id Python.Python.3.12 -e
+#    Miniconda / Anaconda count too — they ship a working `python.exe`.
 
 # 2. Clone and enter the project
 git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
 cd ua-rd-extraction
 
 # 3. Isolated environment
-py -m venv .venv
+python -m venv .venv
+#    If `python` isn't found but `py` is (python.org installer with
+#    Py-Launcher), use `py -m venv .venv` instead.
 
 # 4. Activate it
 #    If PowerShell blocks the activate script, run once per shell session:
@@ -91,6 +94,8 @@ pip install -r requirements.txt
 # 6. Place the dataset
 #    Copy the UKRISTEI archive into .\data\raw_2017\ so that
 #    .\data\raw_2017\2017-01\, …\2017-12\ exist.
+#    (Tests and the prebuilt CSV in the repo work without raw data;
+#    only `extract_rd_data.py` itself needs the PDFs.)
 
 # 7. Run
 python extract_rd_data.py --sample 5     # smoke test on 5 files
