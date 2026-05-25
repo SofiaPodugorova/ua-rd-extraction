@@ -62,7 +62,6 @@ pip install -r requirements.txt
 
 # 6. Run (substitute `--data-dir` if you chose option (b))
 python extract_rd_data.py --sample 5     # smoke test on 5 files
-pytest tests/ -v                          # full test suite
 python extract_rd_data.py                 # full dataset (~1.5–3 min)
 ```
 
@@ -99,12 +98,9 @@ pip install -r requirements.txt
 #    b) Keep it wherever it lives (e.g. D:\datasets\ukristei_2017) and
 #       pass the path with --data-dir at run time. Quote paths that
 #       contain spaces or Cyrillic characters.
-#    (Tests and the prebuilt CSV in the repo work without raw data;
-#    only `extract_rd_data.py` itself needs the PDFs.)
 
 # 7. Run (substitute `--data-dir` if you chose option (b))
 python extract_rd_data.py --sample 5     # smoke test on 5 files
-pytest tests/ -v                          # full test suite
 python extract_rd_data.py                 # full dataset (~1.5–3 min)
 #    Example with a custom dataset path:
 #        python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017"
@@ -116,8 +112,7 @@ Same steps as macOS, replacing `brew install python` with the distro's
 package (`sudo apt install python3 python3-venv python3-pip` on Debian /
 Ubuntu, `sudo dnf install python3 python3-pip` on Fedora).
 
-Pinned dependencies: `pymupdf==1.27.2.3`, `pandas==3.0.3`, `langdetect==1.0.9`,
-`pytest==9.0.3` (dev only).
+Pinned dependencies: `pymupdf==1.27.2.3`, `pandas==3.0.3`, `langdetect==1.0.9`.
 
 CLI options:
 
