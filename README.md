@@ -153,19 +153,30 @@ sample are already in the repo.
 **UTF-8 with BOM** specifically so spreadsheet apps render the Ukrainian
 text correctly on a plain double-click:
 
-- **Excel** (Windows / Mac) — double-click `samples/sample_output.csv`
-  (5 rows, small) or `data/output_2017.csv` (1 518 rows, ~12 MB).
-- **Numbers** (Mac) — same, double-click opens it.
-- **LibreOffice Calc** — same. In the import dialog leave the defaults
-  (separator: comma, encoding: UTF-8) and click OK.
+**Easiest path — open `samples/sample_output.csv` (5 rows, ~42 KB):**
+
+- On GitHub directly: this file is small enough that the web UI renders
+  it as a sortable table in the browser — no download, no spreadsheet app.
+  [Open on GitHub →](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/samples/sample_output.csv)
+- Or download and double-click — opens in Excel / Numbers /
+  LibreOffice Calc with the Ukrainian text intact (UTF-8 BOM is set
+  precisely for this).
+- Or `samples/preview.html` — a self-contained HTML rendering of the
+  same 5 rows, opens in any browser without a spreadsheet app.
+
+**For the full `data/output_2017.csv` (1 518 rows, ~12 MB):** GitHub's
+web UI refuses to render files this large as tables — use the **Download
+raw file** button on the file's GitHub page, then open the downloaded
+file in:
+
+- **Excel** (Windows / Mac) — double-click.
+- **Numbers** (Mac) — double-click.
+- **LibreOffice Calc** — double-click; in the import dialog leave the
+  defaults (separator: comma, encoding: UTF-8) and click OK.
 - **Google Sheets** — *File → Import → Upload* the CSV; pick
   "Replace spreadsheet" and "Comma" as separator.
-- **GitHub** — clicking the CSV in the GitHub web UI renders the first
-  ~hundreds of rows as a sortable table directly in the browser
-  (no download needed).
 
-`samples/preview.html` is a self-contained HTML view of the 5 sample rows
-— open it in any browser if you don't have a spreadsheet app handy.
+Or clone the whole repo (`git clone …`) and double-click the CSV locally.
 
 **Read the code.** `extract_rd_data.py` is a single annotated file (~660
 lines). Open it in any text editor or in the GitHub web UI. The function
