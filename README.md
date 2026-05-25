@@ -254,20 +254,7 @@ numeral (e.g. `III. Відомості про виконавця`), which reject
 against author initials in the bibliography. All 1 518 documents yield all
 10 sections.
 
-### 8. Field boundaries — explicit whitelist
-Multi-line values terminate at the next `Label:` or sub-header line, defined
-as **exact whitelists** in `extract_rd_data.py`: `_LABEL_NAMES_WITH_COLON`
-(~50 entries, including all three funding-amount currency variants) and
-`_SUB_HEADER_NAMES` (`Джерела фінансування`, `Керівники роботи`,
-`Практична реалізація НТП`, `Характер співробітництва з інвестором`).
-A heuristic like `[А-ЯІЄЇ][^\n:\d]{1,60}:` is unsafe — Ukrainian abstracts
-routinely open with phrases that look like labels (`Об'єкт дослідження:`,
-`Мета роботи:`, `Звіт про НДР:`) and would silently truncate hundreds of
-values. Any label introduced in future-year batches must be added here.
-
-### 9. Source-data artefacts (preserved as-is)
-- `performer_location` is empty in 99.8 % of reports (institutes typically
-  only fill the customer's address in Section V).
+### 8. Source-data artefacts (preserved as-is)
 - `stage_title` of 5 reports starts with a literal `91` prefix (footnote
   marker not separated from text in the source). One report has
   `stage_number` = `91` instead of the typical 1–5.
@@ -287,5 +274,3 @@ values. Any label introduced in future-year batches must be added here.
 - 9 reports funded in foreign currency use a non-canonical funding-amount
   label; their amounts are captured in `funding_amount_usd` /
   `funding_amount_eur`, kept separate from `funding_amount_kgrn`.
-- `funding_sources` of 156 reports preserves an internal `\n` from a line
-  wrap in the source form — kept verbatim per the cell-newline contract.
