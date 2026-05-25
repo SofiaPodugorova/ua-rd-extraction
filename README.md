@@ -66,8 +66,16 @@ git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
 cd ua-rd-extraction
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+
+# Hook up the dataset — pick ONE of:
+#   (a) put the UKRISTEI archive at ./data/raw_2017/ (so that
+#       ./data/raw_2017/2017-01/, …/2017-12/ exist), then run:
 python extract_rd_data.py --sample 5           # smoke test on 5 files
 python extract_rd_data.py                      # full run, ~1.5–3 min
+
+#   (b) leave the dataset wherever it is and pass --data-dir:
+python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017 --sample 5
+python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017
 ```
 
 ### Windows (PowerShell)
@@ -79,8 +87,17 @@ cd ua-rd-extraction
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1                   # if blocked: Set-ExecutionPolicy -Scope Process RemoteSigned
 pip install -r requirements.txt
+
+# Hook up the dataset — pick ONE of:
+#   (a) put the UKRISTEI archive at .\data\raw_2017\ (so that
+#       .\data\raw_2017\2017-01\, …\2017-12\ exist), then run:
 python extract_rd_data.py --sample 5
 python extract_rd_data.py
+
+#   (b) leave the dataset wherever it is and pass --data-dir
+#       (quote paths with spaces / Cyrillic characters):
+python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017" --sample 5
+python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017"
 ```
 
 ### Linux
