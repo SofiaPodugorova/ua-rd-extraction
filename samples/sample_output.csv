@@ -1,0 +1,209 @@
+﻿source_file,year,language,registration_number,registration_date,special_marks,stage_number,stage_title,stage_start,stage_end,report_type,performer_name,performer_edrpou,performer_location,performer_ministry,performer_phone,co_performers,customer_name,customer_edrpou,customer_location,customer_ministry,customer_phone,legal_basis,funding_direction,funding_sources,budget_code,funding_amount_kgrn,funding_amount_usd,funding_amount_eur,title_uk,title_en,abstract_uk,abstract_en,udc_index,thematic_codes,pi_name,pi_degree,pi_title,pi_orcid,additional_info,ntp_title_uk,ntp_title_en,ntp_planned,ntp_failure_reasons,ntp_results,ntp_application_field,ntp_card_number,ntp_description,ntp_socioeconomic,ntp_environment,ntp_implementation,ntp_consumers,ntp_markets,ntp_invest_amount_kgrn,ntp_investor_rights,ntp_business_plan,ntp_techno_economic_basis,ntp_sales_amount_kgrn,ntp_payback_years,bibliography,org_head,executors,lang_stage_title,lang_special_marks,lang_report_type,lang_performer_name,lang_performer_location,lang_performer_ministry,lang_co_performers,lang_customer_name,lang_customer_location,lang_customer_ministry,lang_legal_basis,lang_funding_direction,lang_funding_sources,lang_title_uk,lang_title_en,lang_abstract_uk,lang_abstract_en,lang_pi_name,lang_pi_degree,lang_pi_title,lang_additional_info,lang_ntp_title_uk,lang_ntp_title_en,lang_ntp_planned,lang_ntp_failure_reasons,lang_ntp_results,lang_ntp_application_field,lang_ntp_description,lang_ntp_socioeconomic,lang_ntp_environment,lang_ntp_implementation,lang_ntp_consumers,lang_ntp_markets,lang_ntp_investor_rights,lang_ntp_business_plan,lang_ntp_techno_economic_basis,lang_bibliography,lang_org_head,lang_executors
+0216U002963_Head_ Ostapov Serhii Eduardovich . Development of .pdf,2017,uk,0216U002963,03-01-2017,відкрита,1,"91Розробка програмно-апаратної системи для дослідження параметрів нано- та 
+ мікрооб'єктів у колоїдних розчинах та твердих тілах.",01.2015,12.2016,Остаточний звіт,"Чернівецький національний університет імені Юрія 
+ Федьковича",02071240,,"Міністерство освіти і науки, молоді та спорту України",584708,,Міністерство освіти і науки України,38621185,"просп. Перемоги, 10, м. Київ, Київська обл., 01135, Україна",Кабінет Міністрів України,"380444813221, 380444814763","34 - договір (замовлення) з центральним органом виконавчої влади, 
+ академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,2201040,400,,,"Розробка програмно-апаратної системи для дослідження параметрів нано- та мікрооб'єктів у колоїдних 
+ розчинах та твердих тілах.","Development of the software and hardware system for the study of the nano- and micro-objects parameters in 
+ colloidal solutions and solids.","Розроблено нові дешеві методики дослідження параметрів та характеристик мікро- та нанооб'єктів та 
+ реалізації їх у програмно-апаратному комплексі для автоматизації процесів дослідження досконалості 
+ кристалів напівпровідників та процесу нанотрекінгу, а також розробці оптимальних методів підготовки 
+ зразків для автоматизованого аналізу.","The new low-cost methods of research the parameters and characteristics of micro- and nano-objects were 
+ developed and implemented in the software-hardware system for the automation of the processes of research the 
+ purity of semiconductor crystals and nanotracking process and developing optimal methods for the preparation of 
+ samples for automated analysis.","546, 546.06; 546.07; 544.77.03; 004.931; 004.932; 53.087",31.17.15,Остапов Сергій Едуардович,,,,,"Методика розпізнавання та статистичного аналізу треків наночастинок 
+ металів у колоїдних розчинах, а також визначення локальних параметрів розчинів","The methodics of recognition and statistical analysis for the nanoparticles in 
+ colloidal solutions and determine the local solution parameters",,,,"М 72.19. Дослідження і експериментальні розробки у сфері інших природничих і 
+ технічних наук",,"Розроблене устаткування дозволяє за допомогою простого методу нанотрекінгу визначати з 
+ достатньою точністю розміри наночастинок та локальні параметри колоїдних розчинів: температуру та 
+ в'язкість.",,,Впроваджено,"Можливими споживача можуть бути викладачі студенти, наукові співробітники.",Україна,0,,Ні,Ні,0,-,"1.Д'яченко Л.І., Остапов С.Е., Фочук П.М., Халавка Ю.Б. Системи комп'ютерного бачення в наукових 
+ дослідженнях. Монографія: Електронне видання, ЧНУ ім.Ю.Федьковича, 2016. - 108 С. ISBN 978-966- 482-042- 
+ 1. 2.Khalavka Yuriy. Metal and semiconductor heteronanostructures. [ebook] - Mainz. - University of Mainz, 2015. - 
+ 114 p. 3. Petro Fochuk. Electrical properties of In or Ga-saturated CdTe crystals at high-temperature point defect
+equilibrium [text] /Petro Fochuk, Oleh Panchuk, Yevhen Nykonyuk, Serhiy Solodin, Lilya Diachenko, Roman Grill, 
+ Derek Shaw. // Journal of Alloys and Compounds. V. 664. - 2016. - Р. 499 - 502. 4. O.Val'. Software for optical 
+ Recognition of Micro- and Nano-Objects in Solids and colloidal Solutions [text] / O.Val', L. Diachenko, E.Minov, S. 
+ Ostapov, P. Fochuk, Yu. Khalavka, O. Kopach// Twelfth International Conference on Correlation Optics, Proc. of 
+ SPIE Vol. 9809, 98090U-1- 98090U-11. 5. Yu. Khalavka. Properties of CdSb thin films obtained by RF sputtering/A.I. 
+ Savchuk, V.V. Strebezhev, G.I. Kleto, Y.B. Khalavka, I.М. Yuriychuk, , P.M. Fochuk, V.М. trebezhev//Surface and 
+ Coatings Technology. - Volume 295. - 2016. - pp. 8-12. 2,139. 6. Freik D., Galushchak M., Nykyruy L., Horichok I., 
+ Matkivsky O. Khalavka Y.Thermoelectric Composites on the Base of PbTe with Nanoinclusion of Colloidal Silver. 
+ // Journal of Nano- and Electronic Physics. -2015. - Vol.7, N.4, - P.04006 - 04011. 7. Yu. Khalavka. Polarization and 
+ distance dependent coupling in linear chains of gold nanoparticles / V.V. Kravets, L.E Ocola, Y.Khalavka, A.O 
+ Pinchuk. // Applied Physics Letters. ? 2015. ? V.106. ? P.053104.",Фочук Петро Михайлович,"Бабенецький Віктор Єремійович
+Валь Олександр Данилович
+Д'яченко Лілія Іванівна
+Кобітович Оксана Мар'янівна
+Копач Олег Вадимович
+Крупко Олена Василівна
+Остапов Сергій Едуардович
+Фратавчан Валерій Григорович
+Халавка Юрій Богданович",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,empty,uk,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,en,uk,uk
+0217U003510_Head_ Teleutsia_ Valentyna . Intangible cultural h.pdf,2017,uk,0217U003510,04-05-2017,відкрита,,,,,,Український центр культурних досліджень МКіМУ,02215041,,Міністерство культури і мистецтв України,254 35 44,,Міністерство культури і туризму України,00013333,"вул. Івана Франка, 19, м. Київ, Київ, 01601, Україна",Кабінет Міністрів України,2352378,"34 - договір (замовлення) з центральним органом виконавчої влади, 
+ академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,1801020,140.4,,,Нематеріальна культурна спадщина в контексті культурної політики України,Intangible cultural heritage in the context of cultural policy of Ukraine,"В дослідженні здійснено аналітичний огляд тенденцій дослідження та збереження нематеріальної 
+ культурної спадщини в Європі. Проведено комплексний аналіз стратегії співробітництва ЮНЕСКО й України 
+ у сфері охорони та збереження нематеріальної культурної спадщини. Визначено національні правові та 
+ інституційні механізми у сфері охорони нематеріальної культурної спадщини. Узагальнено міжнародний 
+ досвід у сфері охорони культурної спадщини. Подано інформацію щодо заходів з імплементації Конвенції 
+ ЮНЕСКО про охорону нематеріальної спадщини в Україні.","In the study carried out an analytical review of trends of the study and preservation of intangible cultural heritage 
+ in Europe. A comprehensive analysis of the strategies of cooperation between UNESCO and Ukraine in the field of 
+ protection and preservation of intangible cultural heritage. Defined by the national, legal and institutional 
+ mechanisms in the field of protection of intangible cultural heritage. Summarized the international experience in 
+ the sphere of cultural heritage protection. Provides information about measures for implementation of the 
+ UNESCO Convention about protection of intangible heritage in Ukraine.","008, 719:801.81:322(477=4)",13.01,Телеуця Валентина Василівна,,,,,"Аналітичний огляд тенденцій дослідження та збереження нематеріальної 
+ культурної спадщини в Європі","Analytical review of trends in research and preservation of intangible cultural 
+ heritage in Europe",,,інформаційно-аналітичні документи,"Культура, регіональний розвиток, туристична галузь, освіта, соціальна політика",,"Аналітичні огляди ""Тенденції дослідження та збереження нематеріальної культурної спадщини 
+ в Європі"", ""Національні правові та інституційні механізми у сфері охорони нематеріальної культурної 
+ спадщини"", ""Міжнародний досвід у сфері охорони культурної спадщини"", ""Заходи з імплементації Конвенції 
+ ЮНЕСКО про охорону нематеріальної спадщини в Україні"", ""Робота клубних закладів, ОЦНТ у напрямку 
+ збереження нематеріальної культурної спадщини, а також щодо реалізації регіональної культурної політики 
+ держави у цій сфері"".",,,Не впроваджено,"Галузь культури України, туристична галузь",Культура України,,,,,,,"1.Телеуця В.В. Нематеріальна культурна спадщина: внутрішній і міжнародний вектори культурної політики 
+ // Матеріали Дев'ятих всеукраїнських наукових фольклористичних читаннь, присвячені професору Лідії 
+ Дунаєвській"" (20-27 травня 2016 р., м. Київ) К. 2016. С.94-97. 2. Телеуця В.В. Нематеріальна культурна 
+ спадщина: сучасні рівні сприйняття культових елементів в обрядових текстах // Економіко-культурологічне 
+ позиціонування України в світовому глобалізованому просторі: матеріали I Міжнародної науково-практичної 
+ конференції (м. Кошице, 14-15 лютого 2016 р.). - Ч. 2. - Кошице, 2016. - 250 с. - С. 438-441. 3.Телеуця В.В. 
+ Нематеріальна культурна спадщина південного регіону в наукових студіях та проектах творчої інтелігенції 
+ // Феномен української інтелігенції в контексті глобальних трансформацій (до 95-річчя заснування 
+ Донецького національного технічного університету): матеріали Всеукраїнської науково-практичної
+конференції (Красноармійськ, ДонНТУ, 17-18 березня 2016 року) / Вст. сл. проф. Кашуба М. В., відп. ред. проф. 
+ Нікульчев М. О. - Красноармійськ : ДВНЗ ""ДонНТУ"", 2016. -270-274. 4.Телеуця В.В.Нематеріальна культурна 
+ спадщина як джерело формування культурних індустрій етнорегіонів України // Українська культура: 
+ перспективи євроінтеграції. Інноваційні процеси в сучасній культурі : зб. Матеріалів Всеукр. наук.-практич. 
+ конф., м. Київ, 7-8 квітня 2016 р. - Київ : КНУКіМ, 2016. - Ч. ІІ. - 192 с. - С. 113-115. 5.Телеуця В.В. Регіональні 
+ особливості соціокультурних процесів Українського Подунав'я // Збірник матеріалів Всеукраїнської 
+ науково-теоретичної конференції ""Сучасні соціокультурні та політичні процеси в Україні"". Треті наукові 
+ читання присвячені пам'яті доктора філософських наук, професора О. М. Семашко, Київ, 01 червня 2016 р. - 
+ Київ: НАКККіМ, 2016 р. - 136 с. -С.54-57. 6.Телеуця В.В. Сучасна інтерпретація символів у фольклорному тексті 
+ Подунав'я// Інтерпретація як інструмент культурологічного дискурсу: зб. тез доповідей Всеукраїнської 
+ наук.-теорет. конф., Київ, 2-3 червня 2016 р. К.: ІК НАМ України, 2016. 132 с. С.105-107. 7.Телеуця В.В. 
+ Загальнодержавна культурна політика як чинник збереження фольклорної традиції в сучасних умовах // 
+ Традиційна культура України ХХІ ст. як складова культурної політики: сучасний стан, загрози, перспективи: 
+ Зб. наукових праць за матеріалами Всеукраїнської науково-практичної конференції з міжнародною участю, 
+ 21 жовтня 2016 р. , Київ: У 2-х т., Т.І / Український центр культурних досліджень; заг. ред. О.А.Буценка [та ін.]; 
+ [упор. Босик З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 154 с. С. 37-41. 8.Телеуця В.В. Нематеріальна 
+ культурна спадщина південного регіону: процеси взаємодії та взаємовпливу // Електронний облік: система 
+ впорядкування інформації та реєстрації елементів нематеріальної культурної спадщини: Зб. наукових праць 
+ за матеріалами наук.-практ. конф., Київ, 10-11 листопада 2016 р. / Український центр культурних досліджень; 
+ заг. ред. О.А.Буценка; [упоряд. Снігирьова Л.М..; відп. редактор Телеуця В.В.]. К.: НАККіМ, 2016. 64 с. С. 55-57. 
+ 9.Телеуця В.В. Нематеріальна культурна спадщина південного регіону: етнічні та етнокультурні впливи // 
+ Імплементація Конвенції про охорону нематеріальної культурної спадщини: підсумки та перспективи: Зб. 
+ наук. праць за матеріалами ІІ Всеукраїнської наук.-практ. еонф., Київ, 16 грудня 2016 р. / Український центр 
+ культурних досліджень; заг. ред. О.А.Буценка; [упор. Босик З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 136 
+ с. С. 114-119. 10.Александрова І.В. Українська іграшка: специфіка, технологія, популяризація // Традиційна 
+ культура України ХХІ ст. як складова культурної політики: сучасний стан, загрози, перспективи: Зб. наукових 
+ праць за матеріалами Всеукраїнської науково-практичної конференції з міжнародною участю, 21 жовтня 2016 
+ р. , Київ: У 2-х т., Т.І / Український центр культурних досліджень; заг. ред. О.А.Буценка [та ін.]; [упор. Босик 
+ З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 154 с. С. 104-105. 11.Александрова І.В. Популяризація та 
+ збереження нематеріальної культурної спадщини через патріотичне виховання Електронний облік: система 
+ впорядкування інформації та реєстрації елементів нематеріальної культурної спадщини: Зб. наукових праць 
+ за матеріалами наук.-практ. конф., Київ, 10-11 листопада 2016 р. / Український центр культурних досліджень; 
+ заг. ред. О.А.Буценка; [упоряд. Снігирьова Л.М..; відп. редактор Телеуця В.В.]. К.: НАККіМ, 2016. 64 с. С. 3-4.",Буценко Олександр Алімович,Александрова Інна Володимирівна,empty,uk,empty,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,uk,uk,uk
+0217U006452_Head_ Chyrko L.I. . Testing of standart and recons.pdf,2017,uk,0217U006452,14-07-2017,відкрита,1,"Випробування штатних та реконструйованих зразків-свідків комплектів 4Л і 4М корпуса 
+ реактора енергоблоку №2 ВП ЮУАЕС",09.2015,06.2017,Остаточний звіт,Інститут ядерних досліджень НАН України,23724640,,Національна академія наук України,"0445251456, 0445254463",,"ВП НТЦ ДП ""НАЕК ""Енергоатом""",26379406,"вул. Б. Хмельницького, 63А, м. Київ, Київ, 01054, Україна",Міністерство енергетики та вугільної промисловості України,0442777883,"52 - договір з вітчизняною організацією (органами місцевої ради, 
+ фондом, асоціацією, концерном тощо)",2.1 - фундаментальні дослідження,"7722 - кошти підприємств, установ, організацій України",,2774.52,,,"Випробування штатних та реконструйованих зразків-свідків комплектів 4Л і 4М корпуса реактора 
+ енергоблоку № 2 ВП ЮУАЕС","Testing of standart and reconstructed surveillance samples of 4Л and 4M sets of the power unit №2 of reactor 
+ vessel SUNPP","В роботі визначені радіаційно-стимульовані зміни механічних властивостей та знайдені критичні 
+ температури крихкості матеріалів корпусу реактора енргоблока №2 Южно-Української АЕС. Обгрунтовано 
+ термін безпечної експлуатації даного корпусу реактора до кінця 60-ї паливної кампанії.","In this work radiative stimulated changes of mecanical properties are determined and critical temperatures of 
+ material brittleness of RPV #2 of Uzhno-Ukrainian NPP are ftned. The life-time of safe operation of given reactor 
+ vessel till the end of 60-th fuel company is based.","539.163.07, 621.039.577:620.193.2",58.31.31,Чирко Людмила Іванівна,,,,,"Технологічна документація щодо безпечної експлуатації корпусу реактора 
+ енергоблоку №2 Южно-Української АЕС.","Technological documentation of the safe operation of Uzhno-Ukrainian NPP unit 
+ №2",,,Технологічна документація,Атомна енергетика,,"Для обгрунтування терміну безпечної експлуатації корпусу реактора було проведено 
+ дослідження та аналіз даних з радіаційного окрихчування досліджуваних матеріалів.",,,Впроваджено,"ЮУ АЕС України, ДП НАЕК ""Енергоатом"", ІЯД НАН України","Росія, Чехія, Болгарія",4000,,Ні,Ні,0,,,Слісенко Василь Іванович,"Гульчук Ю.С.
+Ревка В.М.,
+Чайковський Ю.В.",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,empty,uk,uk
+0217U001919_Head_ Evgen Dykyi . Scientific support for the ful.pdf,2017,uk,0217U001919,13-10-2017,відкрита,1,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно збереження 
+ біорізноманіття та відновлення живих ресурсів моря у 2015 р.",01.2016,12.2016,Остаточний звіт,"НДУ ""Український науковий центр екології моря""",02572516,,Міністерство екології та природних ресурсів України,(0482) 636-673,,Міністерство енергетики та захисту довкілля України,37552996,"вул. Митрополита Василя Липківського, 35, м. Київ, Київська обл., 03035, Україна",Кабінет Міністрів України,380442063115,"34 - договір (замовлення) з центральним органом виконавчої влади, 
+ академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,2401040,306.185,,,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно збереження біорізноманіття та 
+ відновлення живих ресурсів моря у 2015 р.","Scientific support for the fulfillment of international obligations of Ukraine on biodiversity conservation and 
+ recovery of living marine resources in 2015.","Звіт про НДР: 89 с., 7 табл., 47 рис., 4 дод., 20 джерел. Об'єкт дослідження - планктонні і бентосні спільноти 
+ гідробіонтів Чорного моря; гідробіонти фіто- та мезозоопланктону, макрофітобентосу, а також 
+ макрозообентосу. Мета роботи - дослідження біорізноманіття та стану гідробіонтів у морському середовищі. 
+ Методи досліджень - проведені дослідження гідробіонтів на популяційному (біоценотичному) рівні, в ході 
+ яких визначався стан та біорізноманіття планктонної і бентосної спільноти морських екосистем. В звіті 
+ наведені результати спостережень за гідробіологічною складовою, наведено біорізноманіття гідробіонтів 
+ пелагіалі та бенталі, також проведена оцінки стану біоти за критеріями, прийнятими Секретаріатом 
+ Чорноморської комісії, оцінено трофність вод за комплексними методами E-TRIX та BEAST. Отримана 
+ сучасна інформація про стан фітопланктону та концентрації хлорофілу-а, зоопланктону, макрофітобентосу 
+ та макрозообентосу різних районів моря. В додатках А, Б, В наведено список зареєстрованих видів 
+ фітопланктону, макрозообентосу та макрофітобентосу. В додатку С наведено список публікацій з теми.","Researchreport: 89 p., 7 tab. 47 Fig. 4 annexes, 20 references. Object of the study - planktonic and benthic 
+ community aquatic Black Sea;phyto- and mezozooplankton communitites, macrophytobenthos and 
+ macrozoobenthos. Purpose - study of aquatic biodiversity and the state of the marine environment.Research 
+ Methods - studies on aquatic population (biocenotical) levels, during which the status of biodiversity plankton and 
+ benthic communities and marine ecosystems was asseessed. The report presents the results of observations of 
+ hydrobiological part of marine ecosystem, the study of biodiversity in pelagic and benthic zone, the assessment of 
+ biota status by the criteria adopted by the Secretariat of the Black Sea Commission, and the assessment of water 
+ trophic level by complex E-TRIX and BEAST methods. The result is the modern information about the state of 
+ phytoplankton, chlorophyll-a concentration, zooplankton, macrozoobenthos, macrophytobenthos in the different 
+ areas of the sea. In Annexes A, B, C there are lists of species of phytoplankton, macrozoobenthos and 
+ macrophytobenthos. Appendix C is a list of publications on the subject.","504.4.054; 504.4.06, 574.5(26)",87.19,Дикий Євген Олександрович,,,,,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно 
+ збереження біорізноманіття та відновлення живих ресурсів моря у 2015 р.","Scientific support for the fulfillment of international obligations of Ukraine on 
+ biodiversity conservation and recovery of living marine resources in 2015.",,,поліпшення стану навколишнього середовища,Природокористування,,"Представлені результати сучасних спостережень за станом гідробіологічної складової 
+ (фітопланктон, зоопланктон, макрофітобентос, макрозообентос) на популяційному (біоценотичному) у 
+ різних районах Чорного моря, наведено біорізноманіття гідробіонтів пелагіалі та бенталі, ретроспективна та 
+ сучасна інформація про мінливість концентрацій хлорофілу-а у північно - західній частині Чорного моря , 
+ проведена оцінки стану біоти за критеріями, прийнятими Секретаріатом Чорноморської комісії, оцінено 
+ трофність вод за комплексними методами E-TRIX та BEAST, представлен список зареєстрованих видів 
+ фітопланктону, макрозообентосу та макрофітобентосу району досліджень.",,,Не впроваджено,Міністерство екології та природних ресурсів України,органи виконавчої влади,,,,,,,"1 Теренько Г.В. Зимний фитопланктон Одесского залива Черного моря [Текст] / Г. В. Теренко // Наук. зап. 
+ Терноп. нац. пед. ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 633-636.? ( Серія: Біологія; спец. 
+ вип.: Гідроекологія) 2 Теренько Г. В. Цветение Aphanizomenon flos-aquae (Linn?) Ralfs ex Bornet et Flahault 
+ (Cyanoprokaryota) и Nodularia spumigena Mertens ex Bornet et Flahault (Cyanoprokaryota) в северо-западной 
+ части Черного моря в мае 2015 г. [Текст] / Г. В. Теренко // Современные вопросы экологического 
+ мониторинга водних и наземних екосистем: матеріали . междунар. конф. молодых ученых: ( 26 - 29 октября 
+ 2015 г. , Ростов на Дону) // Ростовский государственый університет. ? Ростов на Дону, 2015. - С. 267-271. 3 
+ Ткаченко Ф. П. Водоросли-макрофиты импактных зон Одесского прибрежья [Текст] / Ф. П. Ткаченко., И. П. 
+ Третьяк // Наук. зап. Терноп. нац. пед. ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 640 - 644. ? ( 
+ Серія: Біологія; спец. вип.: Гідроекологія) 4 Ткаченко Ф. П. Макрофитобентос ботанического заказника обще- 
+ государственного значения ""Филлофорное поле Зернова"" (Украина) [Текст] / Ф. П. Ткаченко, И. П. Третьяк 
+ // Альгология. - 2015. - № 25 (3) - С. 238 -246 5 Ковалишина С. П. Макрозообентос Филлофорного поля 
+ Зернова в мае-июне 2012 г. [Текст] / С. П. Ковалишина, О. Г. Качалов Третьяк // Наук. зап. Терноп. нац. пед. 
+ ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 309 - 313. ? ( Серія: Біологія; спец. вип.: Гідроекологія) 
+ 6 Kondratuk T. Foraminifera as indicators of environmental stress in marine ecosystems: new evidence from the 
+ Romanian and Ukrainian (Black Sea) shelf [Teхt] / T. Kondratuk., V. Yanko-Hombach, S. Kovalishina // Abstract 
+ Submission 2015 GSA Annual Meeting: GSA Official Receipt in Baltimore, Maryland, USA : (1-4 November 
+ 2015,Baltimore, Maryland, USA) / The Geological Society of America P.O. Box 9140 Boulder, CO 80301, 9140. - 
+ Baltimore, Maryland, USA, 2015. - P. 206",Коморін Віктор Миколайович,"Грандова Марія Олександрівна
+Дуднік Дмитро Сергійович
+Качалов Олег Геннадійович
+Ковалішина Светлана Петрівна
+Теренько Галина Вікторівна
+Трет'як Ірина Петрівна
+Український Володимир Васильович",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,mixed,uk,uk
+0317U005120_Head_ Bakhmutov Volodymyr . The model of geophysic.pdf,2017,uk,0317U005120,29-12-2017,відкрита,1,Модель впливу геофізичних чинників на температуру повітря в Антарктиці,11.2017,12.2017,Без звіту,Інститут геофізики ім. С. І. Субботіна НАН України,05417259,,Національна академія наук України,4243105,,"ДУ ""Національний антарктичний науковий центр""",21574751,"бульвар Т. Шевченка, 16, м. Київ, Київська обл., 01601, Україна",Міністерство освіти і науки України,380442463880,"52 - договір з вітчизняною організацією (органами місцевої ради, 
+ фондом, асоціацією, концерном тощо)",2.3 - виконання робіт за державними цільовими програмами,7713 - кошти держбюджету,2201410,120,,,Модель впливу геофізичних чинників на температуру повітря в Антарктиці,The model of geophysical factors influence on air temperature in Antarctica,"На основі аналізу побудованих карт розподілу характеристик геомагнітного поля та атмосфери розроблено 
+ модель, яка адекватно пояснює особливості змін сучасної температури в Антарктиці - одночасне 
+ ""нагрівання"" на заході та ""охолодження"" у центрі та на сході. Вона являє собою ланцюг причинно- 
+ наслідкових зв'язків: геомагнітне поле - потік сонячних протонів - концентрація озону - температура та 
+ вологість поблизу тропопаузи - приземна температура. Нижча інтенсивність геомагнітного поля у Західній 
+ Антарктиці призводить до систематично нижчої концентрації озону та підвищеної вологості на тропопаузі, 
+ що сприяє утриманню довгохвильового випромінювання Землі у тропосфері внаслідок парникового ефекту 
+ та підвищенню приземної температури. Вища інтенсивність геомагнітного поля та концентрації озону у 
+ Центральній та Східній Антарктиці спричинюють підвищення температури та зменшення вологості на рівні 
+ тропопаузи, що не перешкоджає поширенню довгохвильового випромінювання від Землі вгору та сприяє 
+ охолодженню нижньої тропосфери. Врахування геомагнітного поля як фактора впливу на клімат дозволяє 
+ адекватно пояснити знайдені відмінності у Західній і Східній Антарктиці.","The analysis of the created distribution maps of the geomagnetic field and the atmosphere characteristics allowed 
+ us to developed a model that adequately explains the changes in the current Antarctic temperature - simultaneous 
+ ""heating"" in the west and ""cooling"" in the center and in the east. It is a chain of cause-effect relationships: the 
+ geomagnetic field - the flux of solar protons - the concentration of ozone - the temperature and humidity near the 
+ tropopause - the surface temperature. The reduced intensity of the geomagnetic field in the Western Antarctica 
+ results in a systematically low concentration of ozone and increased humidity on the tropopause, which facilitates 
+ the retention of long-wave radiation from the Earth in the troposphere due to the greenhouse effect and an 
+ increase of the surface temperature. The increased intensity of the geomagnetic field and ozone concentration in 
+ the Central and Eastern Antarctica cause an increase in temperature and a decrease in humidity at the level of the 
+ tropopause, which does not prevent the penetration of long-wave radiation from the Earth upwards and causes 
+ cooling of the lower troposphere. Taking into account the geomagnetic field as a factor of influence on the climate 
+ allows us to adequately explain the found differences in Western and Eastern Antarctica.","550.83, 550.83(99)+ 551.524",37.35.05,Бахмутов Володимир Георгійович,,,,,"Еволюційна геотектонічна модель Західної Антарктики за результатами 
+ комплексування тектонофізичних та петромагнітних досліджень району УАС","Evolution geotectonic model of Western Antarctica based on the complexing of 
+ tectonophysical and petromagnetic studies of the UAS area",,,Поліпшення стану навколишнього середовища,73 Геофізика,,"Проведено аналітичні дослідження магнітної текстури гірських порід та створено еволюційну 
+ геотектонічну модель Західної Антарктики за результатами польових геолого-структурних і 
+ тектонофізичних досліджень на геолого-геофізичному полігоні антарктичної станції ""Академік 
+ Вернадський"".",,,Не впроваджено,"Національна академія наук України,Державна установа Національний 
+ антарктичний науковий центр МОН України","наукові установи, освіта",,,,,,,"1. Мельник Г.В., Бахмутов В.Г., Мозгова Т.О., Шендеровська О.Я. Варіації геомагнітного поля в Антарктиці: 
+ особливості та зв'язок з деякими іншими геофізичними явищами. Тези VIIІ Міжнародної Антарктичної 
+ Конференції, присвяченої 25-річчю приєднання України до Договору про Антарктику. Київ, 2017. С. 131 2.
+Бахмутов В.Г., Килифарска Н.А., Мельник Г.В. Геомагнитное поле и климат: причинно-следственные связи в 
+ изменении некоторых параметров верхней атмосферы. Тези Третьої міжнародної наукової конференції 
+ ""Актуальні проблеми геосередовища і зондуючих систем"". Київ, 2017",Старостенко Віталій Іванович,"Мельник Галина Володимирівна
+Мозгова Тамара Олексіївна
+Поляченко Євген Броніславович
+Шендеровська Оксана Ярославівна",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,uk,uk,uk
