@@ -5,6 +5,13 @@ Extracts structured data from 4 129 bilingual Ukrainian R&D project report PDFs
 NLP analysis. Output is one row per report, English snake_case columns,
 UTF-8 with BOM.
 
+> **Just reviewing? You don't need to run anything.** The final
+> `data/output_2017.csv` is already in the repo — double-click it in
+> Excel / Numbers / Google Sheets to see the table, or read
+> `extract_rd_data.py` to see the code. Full reviewer guide:
+> [Reviewing the Submission](#reviewing-the-submission). The install &
+> run section below is for **reproducing** the pipeline from raw PDFs.
+
 ## Purpose
 
 Each PDF is a bilingual form **"Облікова картка ДіР"** (Research Register Card)
@@ -33,6 +40,11 @@ text is identical — so the script keeps one copy per `registration_number`
 (alphabetically first path). Only `*.pdf` files are read.
 
 ## Install & Run
+
+**Use this section only if you want to regenerate the CSV from raw PDFs**
+(e.g. you've changed the parser or you're running on a different year's
+batch). To just inspect the existing output, skip ahead to
+[Reviewing the Submission](#reviewing-the-submission).
 
 Requires **Python 3.10+**. Dataset (`data/raw_2017/`) is not in the repo —
 place the UKRISTEI archive folder there before running.
