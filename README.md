@@ -1,186 +1,117 @@
 # UA R&D Reports Extraction Pipeline — 2017
 
-Extracts structured data from 4 129 bilingual Ukrainian R&D project report PDFs
-(UKRISTEI / Max Planck Keeper archive, 2017) into a single CSV for downstream
-NLP analysis. Output is one row per report, English snake_case columns,
-UTF-8 with BOM.
+Extracts 4 129 bilingual Ukrainian R&D project report PDFs (UKRISTEI /
+Max Planck Keeper archive, 2017) into one structured CSV (1 518 rows ×
+101 columns, English snake_case, UTF-8 with BOM).
 
-> **Just reviewing? You don't need to run anything.** The final
-> `data/output_2017.csv` is already in the repo — double-click it in
-> Excel / Numbers / Google Sheets to see the table, or read
-> `extract_rd_data.py` to see the code. Full reviewer guide:
-> [Reviewing the Submission](#reviewing-the-submission). The install &
-> run section below is for **reproducing** the pipeline from raw PDFs.
+## What's in this repo
 
-## Purpose
+| File | What it is |
+|---|---|
+| [`extract_rd_data.py`](extract_rd_data.py) | The extraction script (one file, ~660 lines, annotated). |
+| [`requirements.txt`](requirements.txt) | Pinned Python dependencies. |
+| [`data/output_2017.csv`](data/output_2017.csv) | **The result.** 1 518 rows × 101 columns, ~12 MB. |
+| [`data/extraction_log.txt`](data/extraction_log.txt) | Per-file extraction log. |
+| [`samples/sample_output.csv`](samples/sample_output.csv) | 5 hand-picked rows from the result. |
+| [`samples/preview.html`](samples/preview.html) | Same 5 rows as a self-contained HTML page. |
 
-Each PDF is a bilingual form **"Облікова картка ДіР"** (Research Register Card)
-with ten Roman-numeral sections covering project metadata, funding, the
-performing organisation, Ukrainian and English titles and abstracts, scientific
-outputs, and bibliography. The script consolidates them into one
-row-per-report CSV with 59 content columns plus per-field language columns
-(`lang_*`).
+Raw PDFs (~gigabytes) are **not** in the repo — only the extracted output.
 
-## Input Folder Structure
+## Quick look — code and result
 
-```
-data/raw_2017/
-├── archive-metadata.md, DOWNLOAD_SUMMARY.txt, FINAL_SUMMARY.txt  (not read)
-├── 2017-01/
-│   ├── 2017-01-03/
-│   │   ├── page_1/0217U000001_Head_ Samoilenko … .pdf, …
-│   │   └── page_2/                  ← same reports, deduplicated automatically
-│   └── …
-└── 2017-02/ … 2017-12/
-```
+You don't have to install anything to inspect what was produced.
 
-Each report appears in 2–13 `page_N/` sub-directories (pagination artefact of
-the archive download). The PDFs differ only in PDF metadata — the extracted
-text is identical — so the script keeps one copy per `registration_number`
-(alphabetically first path). Only `*.pdf` files are read.
+**See the result as a table:**
 
-## Install & Run
+1. Click **[`samples/sample_output.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/samples/sample_output.csv)**
+   on GitHub — small file (5 rows, ~42 KB), GitHub renders it as a sortable
+   table right in the browser.
+2. For the full result, open
+   **[`data/output_2017.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/data/output_2017.csv)**
+   on GitHub and click **"Download raw file"** (top-right) — the file is
+   12 MB so GitHub can't preview it inline. Then double-click the
+   downloaded file: it opens in Excel / Numbers / LibreOffice Calc /
+   Google Sheets with the Ukrainian text intact (UTF-8 BOM is set for
+   exactly this).
+3. Or grab the whole repo at once:
 
-**Use this section only if you want to regenerate the CSV from raw PDFs**
-(e.g. you've changed the parser or you're running on a different year's
-batch). To just inspect the existing output, skip ahead to
-[Reviewing the Submission](#reviewing-the-submission).
+   ```bash
+   git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
+   ```
 
-Requires **Python 3.10+**. Dataset (`data/raw_2017/`) is not in the repo —
-place the UKRISTEI archive folder there before running.
+   …and double-click `data/output_2017.csv` locally.
 
-### macOS — from scratch
+**See the code:** open
+[`extract_rd_data.py`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/extract_rd_data.py)
+on GitHub, or in any text editor / IDE after cloning. The function order
+mirrors the pipeline: PDF → text → sections → fields → language → CSV.
+
+Column meanings and language-detection rules are documented in
+[Output Files](#output-files) below; quirks of the source data are in
+[Known Issues](#known-issues).
+
+## Reproducing the pipeline from scratch
+
+Only needed if you want to **re-run** extraction (e.g. on another year's
+batch). Requires **Python 3.10+** and the raw PDF archive — the dataset
+is not in the repo; put the UKRISTEI archive folder so that the path
+`data/raw_2017/2017-01/`, …, `data/raw_2017/2017-12/` exists, or pass the
+location via `--data-dir`.
+
+### macOS
 
 ```bash
-# 1. Python (skip if `python3 --version` already prints 3.10+)
-brew install python
-
-# 2. Clone and enter the project
+brew install python                            # skip if `python3 --version` ≥ 3.10
 git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
 cd ua-rd-extraction
-
-# 3. Isolated environment
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 4. Dependencies
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
-# 5. Point the script at your dataset (two options)
-#    a) Default location: copy or symlink the UKRISTEI archive into
-#       ./data/raw_2017/ so that ./data/raw_2017/2017-01/, …/2017-12/ exist.
-#    b) Keep it wherever it lives and pass the path with --data-dir.
-#       Example: --data-dir ~/Datasets/ukristei_2017
-
-# 6. Run (substitute `--data-dir` if you chose option (b))
-python extract_rd_data.py --sample 5     # smoke test on 5 files
-python extract_rd_data.py                 # full dataset (~1.5–3 min)
+python extract_rd_data.py --sample 5           # smoke test on 5 files
+python extract_rd_data.py                      # full run, ~1.5–3 min
 ```
 
-### Windows — from scratch (PowerShell)
+### Windows (PowerShell)
 
 ```powershell
-# 1. Python (skip if `python --version` already prints 3.10+)
-#    Either install from https://www.python.org/downloads/windows/
-#    (check "Add python.exe to PATH" during the installer), or:
-winget install --id Python.Python.3.12 -e
-#    Miniconda / Anaconda count too — they ship a working `python.exe`.
-
-# 2. Clone and enter the project
+winget install --id Python.Python.3.12 -e      # skip if `python --version` ≥ 3.10
 git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
 cd ua-rd-extraction
-
-# 3. Isolated environment
 python -m venv .venv
-#    If `python` isn't found but `py` is (python.org installer with
-#    Py-Launcher), use `py -m venv .venv` instead.
-
-# 4. Activate it
-#    If PowerShell blocks the activate script, run once per shell session:
-#        Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-.\.venv\Scripts\Activate.ps1
-#    (cmd.exe users: run `.venv\Scripts\activate.bat` instead)
-
-# 5. Dependencies
+.\.venv\Scripts\Activate.ps1                   # if blocked: Set-ExecutionPolicy -Scope Process RemoteSigned
 pip install -r requirements.txt
-
-# 6. Point the script at your dataset (two options)
-#    a) Default location: copy the UKRISTEI archive into .\data\raw_2017\
-#       so that .\data\raw_2017\2017-01\, …\2017-12\ exist.
-#    b) Keep it wherever it lives (e.g. D:\datasets\ukristei_2017) and
-#       pass the path with --data-dir at run time. Quote paths that
-#       contain spaces or Cyrillic characters.
-
-# 7. Run (substitute `--data-dir` if you chose option (b))
-python extract_rd_data.py --sample 5     # smoke test on 5 files
-python extract_rd_data.py                 # full dataset (~1.5–3 min)
-#    Example with a custom dataset path:
-#        python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017"
+python extract_rd_data.py --sample 5
+python extract_rd_data.py
 ```
 
 ### Linux
 
-Same steps as macOS, replacing `brew install python` with the distro's
-package (`sudo apt install python3 python3-venv python3-pip` on Debian /
-Ubuntu, `sudo dnf install python3 python3-pip` on Fedora).
+Same as macOS, replacing `brew install python` with the distro's package
+(`sudo apt install python3 python3-venv python3-pip` on Debian/Ubuntu).
 
-Pinned dependencies: `pymupdf==1.27.2.3`, `pandas==3.0.3`, `langdetect==1.0.9`.
-
-CLI options:
+### CLI options
 
 | Flag | Default | Purpose |
 |---|---|---|
-| `--data-dir` | `data/raw_2017` | Root folder with month subdirectories of PDFs. Use this if the dataset lives outside the project. |
+| `--data-dir` | `data/raw_2017` | Root folder with month subdirectories of PDFs. Use this if the dataset lives outside the project, e.g. `--data-dir "D:\datasets\ukristei_2017"`. |
 | `--output`   | `data/output_2017.csv` | Where to write the resulting CSV. |
 | `--log`      | `data/extraction_log.txt` | Where to write the per-file log. |
 | `--sample N` | `0` (full run) | Process only N evenly-spaced files — handy for a smoke test. |
 
-Example (dataset stored elsewhere, custom output path):
+### Input folder layout
 
-```bash
-python extract_rd_data.py \
-    --data-dir "/Volumes/Archive/ukristei_2017" \
-    --output   "out/run_2017.csv" \
-    --log      "out/run_2017.log"
+```
+data/raw_2017/
+├── 2017-01/
+│   └── 2017-01-03/
+│       ├── page_1/0217U000001_Head_… .pdf, …
+│       └── page_2/                ← same reports, deduplicated automatically
+└── 2017-02/ … 2017-12/
 ```
 
-## Reviewing the Submission
-
-You don't need to run the pipeline to review it — the prebuilt CSV and the
-sample are already in the repo.
-
-**See the data as a table (no setup required).** The CSVs are written in
-**UTF-8 with BOM** specifically so spreadsheet apps render the Ukrainian
-text correctly on a plain double-click:
-
-**Easiest path — open `samples/sample_output.csv` (5 rows, ~42 KB):**
-
-- On GitHub directly: this file is small enough that the web UI renders
-  it as a sortable table in the browser — no download, no spreadsheet app.
-  [Open on GitHub →](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/samples/sample_output.csv)
-- Or download and double-click — opens in Excel / Numbers /
-  LibreOffice Calc with the Ukrainian text intact (UTF-8 BOM is set
-  precisely for this).
-- Or `samples/preview.html` — a self-contained HTML rendering of the
-  same 5 rows, opens in any browser without a spreadsheet app.
-
-**For the full `data/output_2017.csv` (1 518 rows, ~12 MB):** GitHub's
-web UI refuses to render files this large as tables — use the **Download
-raw file** button on the file's GitHub page, then open the downloaded
-file in:
-
-- **Excel** (Windows / Mac) — double-click.
-- **Numbers** (Mac) — double-click.
-- **LibreOffice Calc** — double-click; in the import dialog leave the
-  defaults (separator: comma, encoding: UTF-8) and click OK.
-- **Google Sheets** — *File → Import → Upload* the CSV; pick
-  "Replace spreadsheet" and "Comma" as separator.
-
-Or clone the whole repo (`git clone …`) and double-click the CSV locally.
-
-**Read the code.** `extract_rd_data.py` is a single annotated file (~660
-lines). Open it in any text editor or in the GitHub web UI. The function
-order mirrors the pipeline: PDF → text → sections → fields → language → CSV.
+Each report appears in 2–13 `page_N/` sub-directories (pagination
+artefact). PDFs differ only in metadata — the extracted text is
+identical — so the script keeps one copy per `registration_number`
+(alphabetically first path). Only `*.pdf` files are read.
 
 ## Output Files
 
