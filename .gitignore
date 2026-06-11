@@ -1,4 +1,4 @@
-data/raw_2017/
+data/raw_*/
 *.zip
 .venv/
 .ipynb_checkpoints/

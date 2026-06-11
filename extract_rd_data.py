@@ -556,7 +556,7 @@ def collect_unique_files(root: Path) -> list[Path]:
 
 # --- Single-file extractor ---
 
-def extract_record(pdf_path: Path, logger: logging.Logger) -> tuple[dict, bool] | None:
+def extract_record(pdf_path: Path, logger: logging.Logger, year: str) -> tuple[dict, bool] | None:
     """Process one PDF into a record. Returns (record, has_warn) or None on error.
 
     `has_warn=True` iff any CRITICAL_FIELDS came back empty.
@@ -597,7 +597,7 @@ def extract_record(pdf_path: Path, logger: logging.Logger) -> tuple[dict, bool] 
         record[f"lang_{field}"] = detect_field_language(record.get(field, "") or "")
     record["language"]    = detect_row_language(record)
     record["source_file"] = pdf_path.name
-    record["year"]        = YEAR
+    record["year"]        = year
 
     logger.debug("DONE %s", pdf_path.name)
     return record, bool(empty_critical)
@@ -614,6 +614,8 @@ def main():
                         help="Root directory containing month subdirectories")
     parser.add_argument("--output", type=Path, default=OUTPUT_CSV, help="Output CSV path")
     parser.add_argument("--log", type=Path, default=LOG_FILE, help="Log file path")
+    parser.add_argument("--year", type=str, default=YEAR,
+                        help="Value for the `year` column (e.g. 2018, 2020)")
     args = parser.parse_args()
 
     logger = setup_logging(args.log)
@@ -631,7 +633,7 @@ def main():
     for i, pdf_path in enumerate(files, 1):
         if i % 100 == 0 or i == len(files):
             logger.info("Progress: %d / %d", i, len(files))
-        result = extract_record(pdf_path, logger)
+        result = extract_record(pdf_path, logger, args.year)
         if result is None:
             n_fail += 1
             continue
