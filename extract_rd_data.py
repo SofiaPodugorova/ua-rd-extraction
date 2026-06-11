@@ -1,7 +1,8 @@
-"""Extract Ukrainian R&D project report PDFs (UKRISTEI archive, 2017) into a
-single CSV for downstream NLP analysis. Each PDF is a bilingual form with ten
-Roman-numeral sections; PyMuPDF's HTML mode is used because the embedded Lora
-font breaks plain-text extraction."""
+"""Extract Ukrainian R&D project report PDFs (UKRISTEI archive) into a single
+CSV per year batch for downstream NLP analysis. Defaults target the 2017
+batch; later batches are processed via --data-dir/--output/--log/--year.
+Each PDF is a bilingual form with ten Roman-numeral sections; PyMuPDF's HTML
+mode is used because the embedded Lora font breaks plain-text extraction."""
 
 import argparse
 import html
@@ -92,12 +93,45 @@ _SECTION_HEADER_RE = re.compile(
     r"(?m)^\s*(X|IX|VIII|VII|VI|V|IV|III|II|I)\.\s+(?=[А-ЯІЄЇ])"
 )
 
+_ROMAN_INDEX = {n: i for i, n in enumerate(
+    ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"])}
+
+
+def _drop_false_headers(matches: list) -> list:
+    """Keep only the longest strictly-increasing run of section numerals.
+
+    Real headers always appear in document order I → X. A bibliography line can
+    still slip past the capital-Cyrillic lookahead when an author initial is a
+    Cyrillic homoglyph (e.g. "V. Оrobej …" with Cyrillic О), and such a match
+    overwrites a real section. False matches break the I → X monotonicity, so
+    the longest strictly-increasing subsequence keeps exactly the real headers.
+    Ties prefer the later match (the closing "X. Заключні відомості" is always
+    the last header in the document).
+    """
+    n = len(matches)
+    if n <= 1:
+        return matches
+    idx = [_ROMAN_INDEX[m.group(1)] for m in matches]
+    best = [1] * n   # length of the longest increasing run ending at i
+    prev = [-1] * n
+    for i in range(n):
+        for j in range(i):
+            if idx[j] < idx[i] and best[j] + 1 > best[i]:
+                best[i] = best[j] + 1
+                prev[i] = j
+    end = max(range(n), key=lambda i: (best[i], i))
+    chain = []
+    while end != -1:
+        chain.append(matches[end])
+        end = prev[end]
+    return chain[::-1]
+
 
 def split_sections(text: str) -> dict[str, str]:
     """Split a document into 10 sections by Roman-numeral headers."""
     sections: dict[str, str] = {n: "" for n in ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]}
 
-    matches = list(_SECTION_HEADER_RE.finditer(text))
+    matches = _drop_false_headers(list(_SECTION_HEADER_RE.finditer(text)))
     for i, m in enumerate(matches):
         numeral = m.group(1)
         start   = m.end()

@@ -1,18 +1,19 @@
-# UA R&D Reports Extraction Pipeline — 2017
+# UA R&D Reports Extraction Pipeline — 2017–2025
 
-Extracts 4 129 bilingual Ukrainian R&D project report PDFs (UKRISTEI /
-Max Planck Keeper archive, 2017) into one structured CSV (1 518 rows ×
-101 columns, English snake_case, UTF-8 with BOM).
+Extracts 50 150 bilingual Ukrainian R&D project report PDFs (UKRISTEI /
+Max Planck Keeper archive, nine yearly batches 2017–2025) into one
+structured CSV per year — 15 244 rows total, with an identical 101-column
+schema in every file (English snake_case, UTF-8 with BOM).
 
 ## What's in this repo
 
 | File | What it is |
 |---|---|
-| [`extract_rd_data.py`](extract_rd_data.py) | The extraction script (one file, ~660 lines, annotated). |
+| [`extract_rd_data.py`](extract_rd_data.py) | The extraction script (one file, ~700 lines, annotated). |
 | [`requirements.txt`](requirements.txt) | Pinned Python dependencies. |
-| [`data/output_2017.csv`](data/output_2017.csv) | **The result.** 1 518 rows × 101 columns, ~12 MB. |
-| [`data/extraction_log.txt`](data/extraction_log.txt) | Per-file extraction log. |
-| [`samples/sample_output.csv`](samples/sample_output.csv) | 5 hand-picked rows from the result. |
+| [`data/output_2017.csv`](data/output_2017.csv) … [`data/output_2025.csv`](data/output_2025.csv) | **The results.** One CSV per year batch, 1 136–2 195 rows × 101 columns each — see the [per-year table](#output-files). |
+| [`data/extraction_log.txt`](data/extraction_log.txt), [`data/extraction_log_2018.txt`](data/extraction_log_2018.txt) … [`data/extraction_log_2025.txt`](data/extraction_log_2025.txt) | Per-file extraction logs (the 2017 log keeps its original unsuffixed name). |
+| [`samples/sample_output.csv`](samples/sample_output.csv) | 5 hand-picked rows from the 2017 result (the schema is identical in every year). |
 | [`samples/preview.html`](samples/preview.html) | Same 5 rows as a self-contained HTML page. |
 
 Raw PDFs (~gigabytes) are **not** in the repo — only the extracted output.
@@ -26,10 +27,10 @@ You don't have to install anything to inspect what was produced.
 1. Click **[`samples/sample_output.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/samples/sample_output.csv)**
    on GitHub — small file (5 rows, ~42 KB), GitHub renders it as a sortable
    table right in the browser.
-2. For the full result, open
+2. For a full result, open any year's CSV — e.g.
    **[`data/output_2017.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/data/output_2017.csv)**
-   on GitHub and click **"Download raw file"** (top-right) — the file is
-   12 MB so GitHub can't preview it inline. Then double-click the
+   — on GitHub and click **"Download raw file"** (top-right) — the files
+   are 10–29 MB so GitHub can't preview them inline. Then double-click the
    downloaded file: it opens in Excel / Numbers / LibreOffice Calc /
    Google Sheets with the Ukrainian text intact (UTF-8 BOM is set for
    exactly this).
@@ -39,7 +40,7 @@ You don't have to install anything to inspect what was produced.
    git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
    ```
 
-   …and double-click `data/output_2017.csv` locally.
+   …and double-click any `data/output_<year>.csv` locally.
 
 **See the code:** open
 [`extract_rd_data.py`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/extract_rd_data.py)
@@ -52,11 +53,13 @@ Column meanings and language-detection rules are documented in
 
 ## Reproducing the pipeline from scratch
 
-Only needed if you want to **re-run** extraction (e.g. on another year's
-batch). Requires **Python 3.10+** and the raw PDF archive — the dataset
-is not in the repo; put the UKRISTEI archive folder so that the path
-`data/raw_2017/2017-01/`, …, `data/raw_2017/2017-12/` exists, or pass the
-location via `--data-dir`.
+Only needed if you want to **re-run** extraction. Requires **Python 3.10+**
+and the raw PDF archive — the dataset is not in the repo; put the UKRISTEI
+archive folder so that the path `data/raw_<year>/<year>-01/`, …,
+`data/raw_<year>/<year>-12/` exists (e.g. `data/raw_2017/2017-01/`), or
+pass the location via `--data-dir`. The commands below use the 2017 batch
+(the script's defaults); for any other year pass the four per-year
+arguments shown at the end of each block.
 
 ### macOS
 
@@ -76,6 +79,10 @@ python extract_rd_data.py                      # full run, ~1.5–3 min
 #   (b) leave the dataset wherever it is and pass --data-dir:
 python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017 --sample 5
 python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017
+
+# Any other year batch — same script, four per-year arguments:
+python extract_rd_data.py --data-dir data/raw_2018 --output data/output_2018.csv \
+    --log data/extraction_log_2018.txt --year 2018
 ```
 
 ### Windows (PowerShell)
@@ -98,6 +105,9 @@ python extract_rd_data.py
 #       (quote paths with spaces / Cyrillic characters):
 python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017" --sample 5
 python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017"
+
+# Any other year batch — same script, four per-year arguments:
+python extract_rd_data.py --data-dir data\raw_2018 --output data\output_2018.csv --log data\extraction_log_2018.txt --year 2018
 ```
 
 ### Linux
@@ -112,7 +122,11 @@ Same as macOS, replacing `brew install python` with the distro's package
 | `--data-dir` | `data/raw_2017` | Root folder with month subdirectories of PDFs. Use this if the dataset lives outside the project, e.g. `--data-dir "D:\datasets\ukristei_2017"`. |
 | `--output`   | `data/output_2017.csv` | Where to write the resulting CSV. |
 | `--log`      | `data/extraction_log.txt` | Where to write the per-file log. |
+| `--year`     | `2017` | Value written to the `year` column of every row — set it to match the batch, e.g. `--year 2018`. |
 | `--sample N` | `0` (full run) | Process only N evenly-spaced files — handy for a smoke test. |
+
+Defaults reproduce the 2017 batch; the four per-year flags together
+reproduce any other year (see the command blocks above).
 
 ### Input folder layout
 
@@ -125,6 +139,11 @@ data/raw_2017/
 └── 2017-02/ … 2017-12/
 ```
 
+Every year batch uses the same layout under its own root
+(`data/raw_2018/2018-01/…`, etc.). Two batches have gaps: the archive
+contains no reports for February–April 2019 and March–April 2020 (see
+Known Issue #9).
+
 Each report appears in 2–13 `page_N/` sub-directories (pagination
 artefact). PDFs differ only in metadata — the extracted text is
 identical — so the script keeps one copy per `registration_number`
@@ -132,15 +151,30 @@ identical — so the script keeps one copy per `registration_number`
 
 ## Output Files
 
-### `data/output_2017.csv`
+### `data/output_<year>.csv` — one CSV per batch
 
-UTF-8 with BOM. One row per unique report. Free-text fields preserve internal
-newlines as `\n`. Columns by section (the three system columns required by
-the spec — `source_file`, `year`, `language` — sit at the front of each row):
+| Batch | Raw PDFs | Rows | Output | Log |
+|---|---:|---:|---|---|
+| 2017 | 4 129 | 1 518 | `output_2017.csv` | `extraction_log.txt` |
+| 2018 | 7 135 | 2 155 | `output_2018.csv` | `extraction_log_2018.txt` |
+| 2019 | 4 875 | 1 490 | `output_2019.csv` | `extraction_log_2019.txt` |
+| 2020 | 4 401 | 1 136 | `output_2020.csv` | `extraction_log_2020.txt` |
+| 2021 | 7 605 | 1 718 | `output_2021.csv` | `extraction_log_2021.txt` |
+| 2022 | 5 112 | 1 171 | `output_2022.csv` | `extraction_log_2022.txt` |
+| 2023 | 6 229 | 1 810 | `output_2023.csv` | `extraction_log_2023.txt` |
+| 2024 | 5 429 | 2 051 | `output_2024.csv` | `extraction_log_2024.txt` |
+| 2025 | 5 235 | 2 195 | `output_2025.csv` | `extraction_log_2025.txt` |
+
+All nine CSVs share the identical 101-column header in the same order.
+UTF-8 with BOM. One row per unique report (in 2024 and 2025 the archive
+itself lists two reports twice — see Known Issue #10). Free-text fields
+preserve internal newlines as `\n`. Columns by section (the three system
+columns required by the spec — `source_file`, `year`, `language` — sit at
+the front of each row):
 
 | Section | Columns |
 |---|---|
-| System | `source_file`, `year` (hardcoded `2017`), `language` (row-level summary) |
+| System | `source_file`, `year` (hardcoded per batch), `language` (row-level summary) |
 | I — General info | `registration_number`, `registration_date`, `special_marks` |
 | II — Work stage | `stage_number`, `stage_title`, `stage_start`, `stage_end`, `report_type` |
 | III — Performer | `performer_name`, `performer_edrpou`, `performer_location`, `performer_ministry`, `performer_phone` |
@@ -166,9 +200,12 @@ taxonomy minus `empty` and is derived from pooled text of `title_uk`,
 `abstract_uk`, `stage_title`, `performer_name`, `customer_name`,
 `ntp_description`.
 
-### `data/extraction_log.txt`
+### `data/extraction_log.txt`, `data/extraction_log_<year>.txt`
 
-Per-file log (DEBUG+ to file, INFO+ to stdout, truncated each run):
+Per-file log, one per batch (DEBUG+ to file, INFO+ to stdout, truncated
+each run). The 2017 log keeps the original unsuffixed name
+`extraction_log.txt`; later batches are suffixed with the year. Example
+(2017):
 
 ```
 2026-05-24 00:08:54 [INFO] Starting extraction from data/raw_2017
@@ -205,11 +242,13 @@ recovers correct Unicode without OCR.
 ### 2. Duplicates across `page_N/` directories
 Each report is mirrored in 2–13 paginated sub-directories. PDFs are
 byte-different (PDF metadata only); extracted text is identical. Script
-deduplicates by `registration_number` → **1 518 unique reports** out of
-4 129 raw PDFs.
+deduplicates by `registration_number` → e.g. **1 518 unique reports** out
+of 4 129 raw PDFs in 2017 (see the per-year table in
+[Output Files](#output-files) for the other batches).
 
 ### 3. Section IV — structured JSON when present
-~5 % of reports (77/1518) list at least one co-performer; the rest leave
+~2–5 % of reports per year (2017: 77/1 518; other batches 24–91 rows)
+list at least one co-performer; the rest leave
 `co_performers` empty. When populated, the cell is a JSON-encoded list of
 dicts with keys `name`, `edrpou`, `location`, `ownership`, `ministry`,
 `ror`, `size`, `phone`, `contribution` (empty sub-fields omitted). If no
@@ -222,17 +261,24 @@ rather than silently dropped.
 ```
 
 ### 4. Section IX (bibliography) — often empty
-Present in ~42 % of reports.
+Present in ~42 % of 2017 reports, rising steadily to ~75 % by 2025.
 
-### 5. Universally-empty template fields in 2017
-Several Section VII / VIII labels exist in every form template but were
-never filled by institutes in the 2017 batch — `pi_orcid`,
-`additional_info`, `ntp_planned`, `ntp_failure_reasons`, `ntp_card_number`,
-`ntp_socioeconomic`, `ntp_environment`, `ntp_investor_rights`. Kept in the
-schema for consistent row shape across reports and forward compatibility
-with later years. The five commercial-track NTP fields (invest amount,
-business plan, techno-economic basis, sales amount, payback years) are
-populated only in 14–18 % of rows.
+### 5. Universally-empty template fields — the form evolves across years
+Several Section VII / VIII labels exist in every form template but are
+filled only from a certain batch on (or never):
+
+- `pi_orcid`, `additional_info`, `ntp_failure_reasons`, `ntp_card_number` —
+  empty in **all** batches through 2025;
+- `ntp_planned` and `ntp_environment` — first filled in the 2025 batch;
+- `performer_location` and `ntp_socioeconomic` — empty in 2017, ~96 % empty
+  in 2018, ~43 % in 2019, then routinely filled from 2020 on;
+- the five commercial-track NTP fields (invest amount, business plan,
+  techno-economic basis, sales amount, payback years) are sparsest after
+  2020: filled in 13–18 % of 2017–2019 rows (with a 2019–2020 spike up to
+  ~61 % for `ntp_business_plan`), but in ≤5 % of rows from 2021 on.
+
+All columns are kept in the schema in every year for a consistent row
+shape across batches.
 
 ### 6. Language detection ladder
 Decision order for `detect_field_language`:
@@ -251,10 +297,20 @@ deterministic so the CSV is byte-stable run-to-run.
 ### 7. Section heading detection
 The Roman-numeral header regex requires a capital Cyrillic letter after the
 numeral (e.g. `III. Відомості про виконавця`), which rejects false matches
-against author initials in the bibliography. All 1 518 documents yield all
-10 sections.
+against author initials in the bibliography. All 1 518 documents in the
+2017 batch yield all 10 sections.
 
-### 8. Source-data artefacts (preserved as-is)
+A handful of lines still slip past that lookahead when the letter after the
+numeral is a **Cyrillic homoglyph** — e.g. the bibliography entry
+`V. Оrobej …` (Cyrillic `О`) or the abstract sentence `X. Невелике
+збурення …`. Real headers always appear in document order I → X, so the
+splitter keeps only the longest strictly-increasing run of numeral matches
+and discards the rest as false positives. Without this filter, exactly
+5 of the 13 726 documents in 2018–2025 lost fields to a false header
+(`0219U003051`, `0221U102437`, `0222U003323`, `0225U003891`,
+`0225U004261`); all five extract fully with it.
+
+### 8. Source-data artefacts in the 2017 batch (preserved as-is)
 - `stage_title` of 5 reports starts with a literal `91` prefix (footnote
   marker not separated from text in the source). One report has
   `stage_number` = `91` instead of the typical 1–5.
@@ -274,3 +330,21 @@ against author initials in the bibliography. All 1 518 documents yield all
 - 9 reports funded in foreign currency use a non-canonical funding-amount
   label; their amounts are captured in `funding_amount_usd` /
   `funding_amount_eur`, kept separate from `funding_amount_kgrn`.
+
+### 9. Months missing from the source archive (2019, 2020)
+The 2019 batch contains no reports dated February–April 2019, and the 2020
+batch none for March–April 2020, although the downloads covered the full
+calendar years — the archive simply has no documents for those months.
+All other batches cover all 12 months.
+
+### 10. Same report under two filenames (2024, 2025)
+Two pairs of files in each of the 2024 and 2025 batches carry different
+registration numbers in the **filename** but identical content — including
+the registration number **inside** the PDF:
+`0224U031550`/`0224U031678`, `0224U031551`/`0224U031611`,
+`0225U001455`/`0225U001530`, `0225U003627`/`0225U003885`.
+De-duplication keys on the filename ID, so each pair yields two rows that
+are identical except for `source_file`: 2 051 rows / 2 049 distinct
+reports in 2024, 2 195 / 2 193 in 2025. Left as-is so that every archive
+file stays accounted for; downstream users can drop duplicates on
+`registration_number`.
