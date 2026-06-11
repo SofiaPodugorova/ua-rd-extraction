@@ -242,13 +242,11 @@ recovers correct Unicode without OCR.
 ### 2. Duplicates across `page_N/` directories
 Each report is mirrored in 2–13 paginated sub-directories. PDFs are
 byte-different (PDF metadata only); extracted text is identical. Script
-deduplicates by `registration_number` → e.g. **1 518 unique reports** out
-of 4 129 raw PDFs in 2017 (see the per-year table in
-[Output Files](#output-files) for the other batches).
+deduplicates by `registration_number` — e.g. **1 518 unique reports** out
+of 4 129 raw PDFs in 2017 (per-year counts in [Output Files](#output-files)).
 
 ### 3. Section IV — structured JSON when present
-~2–5 % of reports per year (2017: 77/1 518; other batches 24–91 rows)
-list at least one co-performer; the rest leave
+~2–5 % of reports per year list at least one co-performer; the rest leave
 `co_performers` empty. When populated, the cell is a JSON-encoded list of
 dicts with keys `name`, `edrpou`, `location`, `ownership`, `ministry`,
 `ror`, `size`, `phone`, `contribution` (empty sub-fields omitted). If no
@@ -263,22 +261,14 @@ rather than silently dropped.
 ### 4. Section IX (bibliography) — often empty
 Present in ~42 % of 2017 reports, rising steadily to ~75 % by 2025.
 
-### 5. Universally-empty template fields — the form evolves across years
-Several Section VII / VIII labels exist in every form template but are
-filled only from a certain batch on (or never):
-
-- `pi_orcid`, `additional_info`, `ntp_failure_reasons`, `ntp_card_number` —
-  empty in **all** batches through 2025;
-- `ntp_planned` and `ntp_environment` — first filled in the 2025 batch;
-- `performer_location` and `ntp_socioeconomic` — empty in 2017, ~96 % empty
-  in 2018, ~43 % in 2019, then routinely filled from 2020 on;
-- the five commercial-track NTP fields (invest amount, business plan,
-  techno-economic basis, sales amount, payback years) are sparsest after
-  2020: filled in 13–18 % of 2017–2019 rows (with a 2019–2020 spike up to
-  ~61 % for `ntp_business_plan`), but in ≤5 % of rows from 2021 on.
-
-All columns are kept in the schema in every year for a consistent row
-shape across batches.
+### 5. Empty template fields — the form evolves across years
+All 101 columns exist in every batch, but some are rarely filled:
+`pi_orcid`, `additional_info`, `ntp_failure_reasons`, `ntp_card_number`
+are empty in all years; `ntp_planned` / `ntp_environment` first appear in
+2025; `performer_location` / `ntp_socioeconomic` are empty in 2017–2018
+and routinely filled from 2020 on; the five commercial-track NTP fields
+(investment, business plan, techno-economic basis, sales, payback) drop
+to ≤5 % filled from 2021 on.
 
 ### 6. Language detection ladder
 Decision order for `detect_field_language`:
@@ -297,18 +287,11 @@ deterministic so the CSV is byte-stable run-to-run.
 ### 7. Section heading detection
 The Roman-numeral header regex requires a capital Cyrillic letter after the
 numeral (e.g. `III. Відомості про виконавця`), which rejects false matches
-against author initials in the bibliography. All 1 518 documents in the
-2017 batch yield all 10 sections.
-
-A handful of lines still slip past that lookahead when the letter after the
-numeral is a **Cyrillic homoglyph** — e.g. the bibliography entry
-`V. Оrobej …` (Cyrillic `О`) or the abstract sentence `X. Невелике
-збурення …`. Real headers always appear in document order I → X, so the
-splitter keeps only the longest strictly-increasing run of numeral matches
-and discards the rest as false positives. Without this filter, exactly
-5 of the 13 726 documents in 2018–2025 lost fields to a false header
-(`0219U003051`, `0221U102437`, `0222U003323`, `0225U003891`,
-`0225U004261`); all five extract fully with it.
+against author initials in the bibliography. Rare lines still sneak past
+via Cyrillic homoglyphs (e.g. `V. Оrobej …` with Cyrillic `О`); since real
+headers always appear in order I → X, the splitter keeps the longest
+strictly-increasing run of numeral matches and drops the rest. Only 5 of
+13 726 documents in 2018–2025 needed this.
 
 ### 8. Source-data artefacts in the 2017 batch (preserved as-is)
 - `stage_title` of 5 reports starts with a literal `91` prefix (footnote
@@ -332,19 +315,13 @@ and discards the rest as false positives. Without this filter, exactly
   `funding_amount_eur`, kept separate from `funding_amount_kgrn`.
 
 ### 9. Months missing from the source archive (2019, 2020)
-The 2019 batch contains no reports dated February–April 2019, and the 2020
-batch none for March–April 2020, although the downloads covered the full
-calendar years — the archive simply has no documents for those months.
-All other batches cover all 12 months.
+The archive has no reports for February–April 2019 and March–April 2020;
+all other batches cover all 12 months.
 
 ### 10. Same report under two filenames (2024, 2025)
-Two pairs of files in each of the 2024 and 2025 batches carry different
-registration numbers in the **filename** but identical content — including
-the registration number **inside** the PDF:
-`0224U031550`/`0224U031678`, `0224U031551`/`0224U031611`,
-`0225U001455`/`0225U001530`, `0225U003627`/`0225U003885`.
-De-duplication keys on the filename ID, so each pair yields two rows that
-are identical except for `source_file`: 2 051 rows / 2 049 distinct
-reports in 2024, 2 195 / 2 193 in 2025. Left as-is so that every archive
-file stays accounted for; downstream users can drop duplicates on
-`registration_number`.
+The 2024 and 2025 batches each contain two report pairs with identical
+content but different filenames (`0224U031550`/`0224U031678`,
+`0224U031551`/`0224U031611`, `0225U001455`/`0225U001530`,
+`0225U003627`/`0225U003885`). De-duplication keys on the filename, so each
+pair stays as two identical rows differing only in `source_file`; drop
+duplicates on `registration_number` if needed.
