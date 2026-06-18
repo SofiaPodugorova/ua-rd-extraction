@@ -1,0 +1,24 @@
+# --- Скачанные данные: НЕ хранить в git (тысячи файлов, гигабайты) ---
+nrat_pdfs/
+nrat_*_pdfs*/
+*.pdf
+*.zip
+
+# Чекпоинты прогресса скрапера (служебные, создаются при запуске)
+_progress*.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- ОС / редакторы ---
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
