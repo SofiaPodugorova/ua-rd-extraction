@@ -602,14 +602,18 @@ CSV_COLUMNS = SYSTEM_COLUMNS + DATA_COLUMNS + [f"lang_{f}" for f in TEXT_FIELDS]
 # --- File discovery ---
 
 def collect_files(root: Path) -> list[Path]:
-    """Return every source PDF in deterministic path order.
+    """Return one PDF per full source filename in deterministic path order.
 
     The corrected NRAT dataset may contain multiple, textually distinct PDF
     versions with the same registration number. The hash suffix in each
     filename identifies the source file, so registration number alone must not
-    be used for deduplication.
+    be used for deduplication. Some Drive reruns also created duplicate folders
+    containing the same full filenames; those copies represent one source file.
     """
-    return sorted(root.rglob("*.pdf"))
+    name_to_path: dict[str, Path] = {}
+    for pdf_path in sorted(root.rglob("*.pdf")):
+        name_to_path.setdefault(pdf_path.name, pdf_path)
+    return list(name_to_path.values())
 
 
 # --- Single-file extractor ---
@@ -680,7 +684,7 @@ def main():
     logger.info("Starting extraction from %s", args.data_dir)
 
     files = collect_files(args.data_dir)
-    logger.info("Found %d source PDFs", len(files))
+    logger.info("Found %d unique source PDFs", len(files))
 
     if args.sample:
         step  = max(1, len(files) // args.sample)
