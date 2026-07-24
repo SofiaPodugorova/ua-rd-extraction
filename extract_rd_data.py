@@ -601,19 +601,15 @@ CSV_COLUMNS = SYSTEM_COLUMNS + DATA_COLUMNS + [f"lang_{f}" for f in TEXT_FIELDS]
 
 # --- File discovery ---
 
-def collect_unique_files(root: Path) -> list[Path]:
-    """Return one PDF per unique registration_number.
+def collect_files(root: Path) -> list[Path]:
+    """Return every source PDF in deterministic path order.
 
-    Each report appears in 2–13 sibling `page_N/` directories of the archive
-    (pagination artefact). The PDFs are byte-different but the extracted text
-    is identical, so we keep the alphabetically first path.
+    The corrected NRAT dataset may contain multiple, textually distinct PDF
+    versions with the same registration number. The hash suffix in each
+    filename identifies the source file, so registration number alone must not
+    be used for deduplication.
     """
-    id_to_path: dict[str, Path] = {}
-    for pdf_path in sorted(root.rglob("*.pdf")):
-        report_id = pdf_path.name.split("_")[0]
-        if report_id not in id_to_path:
-            id_to_path[report_id] = pdf_path
-    return list(id_to_path.values())
+    return sorted(root.rglob("*.pdf"))
 
 
 # --- Single-file extractor ---
@@ -683,8 +679,8 @@ def main():
     logger = setup_logging(args.log)
     logger.info("Starting extraction from %s", args.data_dir)
 
-    files = collect_unique_files(args.data_dir)
-    logger.info("Found %d unique reports", len(files))
+    files = collect_files(args.data_dir)
+    logger.info("Found %d source PDFs", len(files))
 
     if args.sample:
         step  = max(1, len(files) // args.sample)
