@@ -1,209 +1,225 @@
 ﻿source_file,year,language,registration_number,registration_date,special_marks,stage_number,stage_title,stage_start,stage_end,report_type,performer_name,performer_edrpou,performer_location,performer_ministry,performer_phone,co_performers,customer_name,customer_edrpou,customer_location,customer_ministry,customer_phone,legal_basis,funding_direction,funding_sources,budget_code,funding_amount_kgrn,funding_amount_usd,funding_amount_eur,title_uk,title_en,abstract_uk,abstract_en,udc_index,thematic_codes,pi_name,pi_degree,pi_title,pi_orcid,additional_info,ntp_title_uk,ntp_title_en,ntp_planned,ntp_failure_reasons,ntp_results,ntp_application_field,ntp_card_number,ntp_description,ntp_socioeconomic,ntp_environment,ntp_implementation,ntp_consumers,ntp_markets,ntp_invest_amount_kgrn,ntp_investor_rights,ntp_business_plan,ntp_techno_economic_basis,ntp_sales_amount_kgrn,ntp_payback_years,bibliography,org_head,executors,lang_stage_title,lang_special_marks,lang_report_type,lang_performer_name,lang_performer_location,lang_performer_ministry,lang_co_performers,lang_customer_name,lang_customer_location,lang_customer_ministry,lang_legal_basis,lang_funding_direction,lang_funding_sources,lang_title_uk,lang_title_en,lang_abstract_uk,lang_abstract_en,lang_pi_name,lang_pi_degree,lang_pi_title,lang_additional_info,lang_ntp_title_uk,lang_ntp_title_en,lang_ntp_planned,lang_ntp_failure_reasons,lang_ntp_results,lang_ntp_application_field,lang_ntp_description,lang_ntp_socioeconomic,lang_ntp_environment,lang_ntp_implementation,lang_ntp_consumers,lang_ntp_markets,lang_ntp_investor_rights,lang_ntp_business_plan,lang_ntp_techno_economic_basis,lang_bibliography,lang_org_head,lang_executors
-0216U002963_Head_ Ostapov Serhii Eduardovich . Development of .pdf,2017,uk,0216U002963,03-01-2017,відкрита,1,"91Розробка програмно-апаратної системи для дослідження параметрів нано- та 
- мікрооб'єктів у колоїдних розчинах та твердих тілах.",01.2015,12.2016,Остаточний звіт,"Чернівецький національний університет імені Юрія 
- Федьковича",02071240,,"Міністерство освіти і науки, молоді та спорту України",584708,,Міністерство освіти і науки України,38621185,"просп. Перемоги, 10, м. Київ, Київська обл., 01135, Україна",Кабінет Міністрів України,"380444813221, 380444814763","34 - договір (замовлення) з центральним органом виконавчої влади, 
- академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,2201040,400,,,"Розробка програмно-апаратної системи для дослідження параметрів нано- та мікрооб'єктів у колоїдних 
- розчинах та твердих тілах.","Development of the software and hardware system for the study of the nano- and micro-objects parameters in 
- colloidal solutions and solids.","Розроблено нові дешеві методики дослідження параметрів та характеристик мікро- та нанооб'єктів та 
- реалізації їх у програмно-апаратному комплексі для автоматизації процесів дослідження досконалості 
- кристалів напівпровідників та процесу нанотрекінгу, а також розробці оптимальних методів підготовки 
- зразків для автоматизованого аналізу.","The new low-cost methods of research the parameters and characteristics of micro- and nano-objects were 
- developed and implemented in the software-hardware system for the automation of the processes of research the 
- purity of semiconductor crystals and nanotracking process and developing optimal methods for the preparation of 
- samples for automated analysis.","546, 546.06; 546.07; 544.77.03; 004.931; 004.932; 53.087",31.17.15,Остапов Сергій Едуардович,,,,,"Методика розпізнавання та статистичного аналізу треків наночастинок 
- металів у колоїдних розчинах, а також визначення локальних параметрів розчинів","The methodics of recognition and statistical analysis for the nanoparticles in 
- colloidal solutions and determine the local solution parameters",,,,"М 72.19. Дослідження і експериментальні розробки у сфері інших природничих і 
- технічних наук",,"Розроблене устаткування дозволяє за допомогою простого методу нанотрекінгу визначати з 
- достатньою точністю розміри наночастинок та локальні параметри колоїдних розчинів: температуру та 
- в'язкість.",,,Впроваджено,"Можливими споживача можуть бути викладачі студенти, наукові співробітники.",Україна,0,,Ні,Ні,0,-,"1.Д'яченко Л.І., Остапов С.Е., Фочук П.М., Халавка Ю.Б. Системи комп'ютерного бачення в наукових 
- дослідженнях. Монографія: Електронне видання, ЧНУ ім.Ю.Федьковича, 2016. - 108 С. ISBN 978-966- 482-042- 
- 1. 2.Khalavka Yuriy. Metal and semiconductor heteronanostructures. [ebook] - Mainz. - University of Mainz, 2015. - 
- 114 p. 3. Petro Fochuk. Electrical properties of In or Ga-saturated CdTe crystals at high-temperature point defect
-equilibrium [text] /Petro Fochuk, Oleh Panchuk, Yevhen Nykonyuk, Serhiy Solodin, Lilya Diachenko, Roman Grill, 
- Derek Shaw. // Journal of Alloys and Compounds. V. 664. - 2016. - Р. 499 - 502. 4. O.Val'. Software for optical 
- Recognition of Micro- and Nano-Objects in Solids and colloidal Solutions [text] / O.Val', L. Diachenko, E.Minov, S. 
- Ostapov, P. Fochuk, Yu. Khalavka, O. Kopach// Twelfth International Conference on Correlation Optics, Proc. of 
- SPIE Vol. 9809, 98090U-1- 98090U-11. 5. Yu. Khalavka. Properties of CdSb thin films obtained by RF sputtering/A.I. 
- Savchuk, V.V. Strebezhev, G.I. Kleto, Y.B. Khalavka, I.М. Yuriychuk, , P.M. Fochuk, V.М. trebezhev//Surface and 
- Coatings Technology. - Volume 295. - 2016. - pp. 8-12. 2,139. 6. Freik D., Galushchak M., Nykyruy L., Horichok I., 
- Matkivsky O. Khalavka Y.Thermoelectric Composites on the Base of PbTe with Nanoinclusion of Colloidal Silver. 
- // Journal of Nano- and Electronic Physics. -2015. - Vol.7, N.4, - P.04006 - 04011. 7. Yu. Khalavka. Polarization and 
- distance dependent coupling in linear chains of gold nanoparticles / V.V. Kravets, L.E Ocola, Y.Khalavka, A.O 
- Pinchuk. // Applied Physics Letters. ? 2015. ? V.106. ? P.053104.",Фочук Петро Михайлович,"Бабенецький Віктор Єремійович
-Валь Олександр Данилович
-Д'яченко Лілія Іванівна
-Кобітович Оксана Мар'янівна
-Копач Олег Вадимович
-Крупко Олена Василівна
-Остапов Сергій Едуардович
-Фратавчан Валерій Григорович
-Халавка Юрій Богданович",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,empty,uk,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,en,uk,uk
-0217U003510_Head_ Teleutsia_ Valentyna . Intangible cultural h.pdf,2017,uk,0217U003510,04-05-2017,відкрита,,,,,,Український центр культурних досліджень МКіМУ,02215041,,Міністерство культури і мистецтв України,254 35 44,,Міністерство культури і туризму України,00013333,"вул. Івана Франка, 19, м. Київ, Київ, 01601, Україна",Кабінет Міністрів України,2352378,"34 - договір (замовлення) з центральним органом виконавчої влади, 
- академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,1801020,140.4,,,Нематеріальна культурна спадщина в контексті культурної політики України,Intangible cultural heritage in the context of cultural policy of Ukraine,"В дослідженні здійснено аналітичний огляд тенденцій дослідження та збереження нематеріальної 
- культурної спадщини в Європі. Проведено комплексний аналіз стратегії співробітництва ЮНЕСКО й України 
- у сфері охорони та збереження нематеріальної культурної спадщини. Визначено національні правові та 
- інституційні механізми у сфері охорони нематеріальної культурної спадщини. Узагальнено міжнародний 
- досвід у сфері охорони культурної спадщини. Подано інформацію щодо заходів з імплементації Конвенції 
- ЮНЕСКО про охорону нематеріальної спадщини в Україні.","In the study carried out an analytical review of trends of the study and preservation of intangible cultural heritage 
- in Europe. A comprehensive analysis of the strategies of cooperation between UNESCO and Ukraine in the field of 
- protection and preservation of intangible cultural heritage. Defined by the national, legal and institutional 
- mechanisms in the field of protection of intangible cultural heritage. Summarized the international experience in 
- the sphere of cultural heritage protection. Provides information about measures for implementation of the 
- UNESCO Convention about protection of intangible heritage in Ukraine.","008, 719:801.81:322(477=4)",13.01,Телеуця Валентина Василівна,,,,,"Аналітичний огляд тенденцій дослідження та збереження нематеріальної 
- культурної спадщини в Європі","Analytical review of trends in research and preservation of intangible cultural 
- heritage in Europe",,,інформаційно-аналітичні документи,"Культура, регіональний розвиток, туристична галузь, освіта, соціальна політика",,"Аналітичні огляди ""Тенденції дослідження та збереження нематеріальної культурної спадщини 
- в Європі"", ""Національні правові та інституційні механізми у сфері охорони нематеріальної культурної 
- спадщини"", ""Міжнародний досвід у сфері охорони культурної спадщини"", ""Заходи з імплементації Конвенції 
- ЮНЕСКО про охорону нематеріальної спадщини в Україні"", ""Робота клубних закладів, ОЦНТ у напрямку 
- збереження нематеріальної культурної спадщини, а також щодо реалізації регіональної культурної політики 
- держави у цій сфері"".",,,Не впроваджено,"Галузь культури України, туристична галузь",Культура України,,,,,,,"1.Телеуця В.В. Нематеріальна культурна спадщина: внутрішній і міжнародний вектори культурної політики 
- // Матеріали Дев'ятих всеукраїнських наукових фольклористичних читаннь, присвячені професору Лідії 
- Дунаєвській"" (20-27 травня 2016 р., м. Київ) К. 2016. С.94-97. 2. Телеуця В.В. Нематеріальна культурна 
- спадщина: сучасні рівні сприйняття культових елементів в обрядових текстах // Економіко-культурологічне 
- позиціонування України в світовому глобалізованому просторі: матеріали I Міжнародної науково-практичної 
- конференції (м. Кошице, 14-15 лютого 2016 р.). - Ч. 2. - Кошице, 2016. - 250 с. - С. 438-441. 3.Телеуця В.В. 
- Нематеріальна культурна спадщина південного регіону в наукових студіях та проектах творчої інтелігенції 
- // Феномен української інтелігенції в контексті глобальних трансформацій (до 95-річчя заснування 
- Донецького національного технічного університету): матеріали Всеукраїнської науково-практичної
-конференції (Красноармійськ, ДонНТУ, 17-18 березня 2016 року) / Вст. сл. проф. Кашуба М. В., відп. ред. проф. 
- Нікульчев М. О. - Красноармійськ : ДВНЗ ""ДонНТУ"", 2016. -270-274. 4.Телеуця В.В.Нематеріальна культурна 
- спадщина як джерело формування культурних індустрій етнорегіонів України // Українська культура: 
- перспективи євроінтеграції. Інноваційні процеси в сучасній культурі : зб. Матеріалів Всеукр. наук.-практич. 
- конф., м. Київ, 7-8 квітня 2016 р. - Київ : КНУКіМ, 2016. - Ч. ІІ. - 192 с. - С. 113-115. 5.Телеуця В.В. Регіональні 
- особливості соціокультурних процесів Українського Подунав'я // Збірник матеріалів Всеукраїнської 
- науково-теоретичної конференції ""Сучасні соціокультурні та політичні процеси в Україні"". Треті наукові 
- читання присвячені пам'яті доктора філософських наук, професора О. М. Семашко, Київ, 01 червня 2016 р. - 
- Київ: НАКККіМ, 2016 р. - 136 с. -С.54-57. 6.Телеуця В.В. Сучасна інтерпретація символів у фольклорному тексті 
- Подунав'я// Інтерпретація як інструмент культурологічного дискурсу: зб. тез доповідей Всеукраїнської 
- наук.-теорет. конф., Київ, 2-3 червня 2016 р. К.: ІК НАМ України, 2016. 132 с. С.105-107. 7.Телеуця В.В. 
- Загальнодержавна культурна політика як чинник збереження фольклорної традиції в сучасних умовах // 
- Традиційна культура України ХХІ ст. як складова культурної політики: сучасний стан, загрози, перспективи: 
- Зб. наукових праць за матеріалами Всеукраїнської науково-практичної конференції з міжнародною участю, 
- 21 жовтня 2016 р. , Київ: У 2-х т., Т.І / Український центр культурних досліджень; заг. ред. О.А.Буценка [та ін.]; 
- [упор. Босик З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 154 с. С. 37-41. 8.Телеуця В.В. Нематеріальна 
- культурна спадщина південного регіону: процеси взаємодії та взаємовпливу // Електронний облік: система 
- впорядкування інформації та реєстрації елементів нематеріальної культурної спадщини: Зб. наукових праць 
- за матеріалами наук.-практ. конф., Київ, 10-11 листопада 2016 р. / Український центр культурних досліджень; 
- заг. ред. О.А.Буценка; [упоряд. Снігирьова Л.М..; відп. редактор Телеуця В.В.]. К.: НАККіМ, 2016. 64 с. С. 55-57. 
- 9.Телеуця В.В. Нематеріальна культурна спадщина південного регіону: етнічні та етнокультурні впливи // 
- Імплементація Конвенції про охорону нематеріальної культурної спадщини: підсумки та перспективи: Зб. 
- наук. праць за матеріалами ІІ Всеукраїнської наук.-практ. еонф., Київ, 16 грудня 2016 р. / Український центр 
- культурних досліджень; заг. ред. О.А.Буценка; [упор. Босик З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 136 
- с. С. 114-119. 10.Александрова І.В. Українська іграшка: специфіка, технологія, популяризація // Традиційна 
- культура України ХХІ ст. як складова культурної політики: сучасний стан, загрози, перспективи: Зб. наукових 
- праць за матеріалами Всеукраїнської науково-практичної конференції з міжнародною участю, 21 жовтня 2016 
- р. , Київ: У 2-х т., Т.І / Український центр культурних досліджень; заг. ред. О.А.Буценка [та ін.]; [упор. Босик 
- З.О.; відп. ред. Телеуця В.В.]. К.: НАККіМ, 2016. 154 с. С. 104-105. 11.Александрова І.В. Популяризація та 
- збереження нематеріальної культурної спадщини через патріотичне виховання Електронний облік: система 
- впорядкування інформації та реєстрації елементів нематеріальної культурної спадщини: Зб. наукових праць 
- за матеріалами наук.-практ. конф., Київ, 10-11 листопада 2016 р. / Український центр культурних досліджень; 
- заг. ред. О.А.Буценка; [упоряд. Снігирьова Л.М..; відп. редактор Телеуця В.В.]. К.: НАККіМ, 2016. 64 с. С. 3-4.",Буценко Олександр Алімович,Александрова Інна Володимирівна,empty,uk,empty,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,uk,uk,uk
-0217U006452_Head_ Chyrko L.I. . Testing of standart and recons.pdf,2017,uk,0217U006452,14-07-2017,відкрита,1,"Випробування штатних та реконструйованих зразків-свідків комплектів 4Л і 4М корпуса 
- реактора енергоблоку №2 ВП ЮУАЕС",09.2015,06.2017,Остаточний звіт,Інститут ядерних досліджень НАН України,23724640,,Національна академія наук України,"0445251456, 0445254463",,"ВП НТЦ ДП ""НАЕК ""Енергоатом""",26379406,"вул. Б. Хмельницького, 63А, м. Київ, Київ, 01054, Україна",Міністерство енергетики та вугільної промисловості України,0442777883,"52 - договір з вітчизняною організацією (органами місцевої ради, 
- фондом, асоціацією, концерном тощо)",2.1 - фундаментальні дослідження,"7722 - кошти підприємств, установ, організацій України",,2774.52,,,"Випробування штатних та реконструйованих зразків-свідків комплектів 4Л і 4М корпуса реактора 
- енергоблоку № 2 ВП ЮУАЕС","Testing of standart and reconstructed surveillance samples of 4Л and 4M sets of the power unit №2 of reactor 
- vessel SUNPP","В роботі визначені радіаційно-стимульовані зміни механічних властивостей та знайдені критичні 
- температури крихкості матеріалів корпусу реактора енргоблока №2 Южно-Української АЕС. Обгрунтовано 
- термін безпечної експлуатації даного корпусу реактора до кінця 60-ї паливної кампанії.","In this work radiative stimulated changes of mecanical properties are determined and critical temperatures of 
- material brittleness of RPV #2 of Uzhno-Ukrainian NPP are ftned. The life-time of safe operation of given reactor 
- vessel till the end of 60-th fuel company is based.","539.163.07, 621.039.577:620.193.2",58.31.31,Чирко Людмила Іванівна,,,,,"Технологічна документація щодо безпечної експлуатації корпусу реактора 
- енергоблоку №2 Южно-Української АЕС.","Technological documentation of the safe operation of Uzhno-Ukrainian NPP unit 
- №2",,,Технологічна документація,Атомна енергетика,,"Для обгрунтування терміну безпечної експлуатації корпусу реактора було проведено 
- дослідження та аналіз даних з радіаційного окрихчування досліджуваних матеріалів.",,,Впроваджено,"ЮУ АЕС України, ДП НАЕК ""Енергоатом"", ІЯД НАН України","Росія, Чехія, Болгарія",4000,,Ні,Ні,0,,,Слісенко Василь Іванович,"Гульчук Ю.С.
-Ревка В.М.,
-Чайковський Ю.В.",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,empty,uk,uk
-0217U001919_Head_ Evgen Dykyi . Scientific support for the ful.pdf,2017,uk,0217U001919,13-10-2017,відкрита,1,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно збереження 
- біорізноманіття та відновлення живих ресурсів моря у 2015 р.",01.2016,12.2016,Остаточний звіт,"НДУ ""Український науковий центр екології моря""",02572516,,Міністерство екології та природних ресурсів України,(0482) 636-673,,Міністерство енергетики та захисту довкілля України,37552996,"вул. Митрополита Василя Липківського, 35, м. Київ, Київська обл., 03035, Україна",Кабінет Міністрів України,380442063115,"34 - договір (замовлення) з центральним органом виконавчої влади, 
- академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,2401040,306.185,,,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно збереження біорізноманіття та 
- відновлення живих ресурсів моря у 2015 р.","Scientific support for the fulfillment of international obligations of Ukraine on biodiversity conservation and 
- recovery of living marine resources in 2015.","Звіт про НДР: 89 с., 7 табл., 47 рис., 4 дод., 20 джерел. Об'єкт дослідження - планктонні і бентосні спільноти 
- гідробіонтів Чорного моря; гідробіонти фіто- та мезозоопланктону, макрофітобентосу, а також 
- макрозообентосу. Мета роботи - дослідження біорізноманіття та стану гідробіонтів у морському середовищі. 
- Методи досліджень - проведені дослідження гідробіонтів на популяційному (біоценотичному) рівні, в ході 
- яких визначався стан та біорізноманіття планктонної і бентосної спільноти морських екосистем. В звіті 
- наведені результати спостережень за гідробіологічною складовою, наведено біорізноманіття гідробіонтів 
- пелагіалі та бенталі, також проведена оцінки стану біоти за критеріями, прийнятими Секретаріатом 
- Чорноморської комісії, оцінено трофність вод за комплексними методами E-TRIX та BEAST. Отримана 
- сучасна інформація про стан фітопланктону та концентрації хлорофілу-а, зоопланктону, макрофітобентосу 
- та макрозообентосу різних районів моря. В додатках А, Б, В наведено список зареєстрованих видів 
- фітопланктону, макрозообентосу та макрофітобентосу. В додатку С наведено список публікацій з теми.","Researchreport: 89 p., 7 tab. 47 Fig. 4 annexes, 20 references. Object of the study - planktonic and benthic 
- community aquatic Black Sea;phyto- and mezozooplankton communitites, macrophytobenthos and 
- macrozoobenthos. Purpose - study of aquatic biodiversity and the state of the marine environment.Research 
- Methods - studies on aquatic population (biocenotical) levels, during which the status of biodiversity plankton and 
- benthic communities and marine ecosystems was asseessed. The report presents the results of observations of 
- hydrobiological part of marine ecosystem, the study of biodiversity in pelagic and benthic zone, the assessment of 
- biota status by the criteria adopted by the Secretariat of the Black Sea Commission, and the assessment of water 
- trophic level by complex E-TRIX and BEAST methods. The result is the modern information about the state of 
- phytoplankton, chlorophyll-a concentration, zooplankton, macrozoobenthos, macrophytobenthos in the different 
- areas of the sea. In Annexes A, B, C there are lists of species of phytoplankton, macrozoobenthos and 
- macrophytobenthos. Appendix C is a list of publications on the subject.","504.4.054; 504.4.06, 574.5(26)",87.19,Дикий Євген Олександрович,,,,,"Наукове забезпечення виконання міжнародних зобов'язань України стосовно 
- збереження біорізноманіття та відновлення живих ресурсів моря у 2015 р.","Scientific support for the fulfillment of international obligations of Ukraine on 
- biodiversity conservation and recovery of living marine resources in 2015.",,,поліпшення стану навколишнього середовища,Природокористування,,"Представлені результати сучасних спостережень за станом гідробіологічної складової 
- (фітопланктон, зоопланктон, макрофітобентос, макрозообентос) на популяційному (біоценотичному) у 
- різних районах Чорного моря, наведено біорізноманіття гідробіонтів пелагіалі та бенталі, ретроспективна та 
- сучасна інформація про мінливість концентрацій хлорофілу-а у північно - західній частині Чорного моря , 
- проведена оцінки стану біоти за критеріями, прийнятими Секретаріатом Чорноморської комісії, оцінено 
- трофність вод за комплексними методами E-TRIX та BEAST, представлен список зареєстрованих видів 
- фітопланктону, макрозообентосу та макрофітобентосу району досліджень.",,,Не впроваджено,Міністерство екології та природних ресурсів України,органи виконавчої влади,,,,,,,"1 Теренько Г.В. Зимний фитопланктон Одесского залива Черного моря [Текст] / Г. В. Теренко // Наук. зап. 
- Терноп. нац. пед. ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 633-636.? ( Серія: Біологія; спец. 
- вип.: Гідроекологія) 2 Теренько Г. В. Цветение Aphanizomenon flos-aquae (Linn?) Ralfs ex Bornet et Flahault 
- (Cyanoprokaryota) и Nodularia spumigena Mertens ex Bornet et Flahault (Cyanoprokaryota) в северо-западной 
- части Черного моря в мае 2015 г. [Текст] / Г. В. Теренко // Современные вопросы экологического 
- мониторинга водних и наземних екосистем: матеріали . междунар. конф. молодых ученых: ( 26 - 29 октября 
- 2015 г. , Ростов на Дону) // Ростовский государственый університет. ? Ростов на Дону, 2015. - С. 267-271. 3 
- Ткаченко Ф. П. Водоросли-макрофиты импактных зон Одесского прибрежья [Текст] / Ф. П. Ткаченко., И. П. 
- Третьяк // Наук. зап. Терноп. нац. пед. ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 640 - 644. ? ( 
- Серія: Біологія; спец. вип.: Гідроекологія) 4 Ткаченко Ф. П. Макрофитобентос ботанического заказника обще- 
- государственного значения ""Филлофорное поле Зернова"" (Украина) [Текст] / Ф. П. Ткаченко, И. П. Третьяк 
- // Альгология. - 2015. - № 25 (3) - С. 238 -246 5 Ковалишина С. П. Макрозообентос Филлофорного поля 
- Зернова в мае-июне 2012 г. [Текст] / С. П. Ковалишина, О. Г. Качалов Третьяк // Наук. зап. Терноп. нац. пед. 
- ун-ту ім. Володимира Гнатюка. - 2015. - № 3 - 4 (64). - С. 309 - 313. ? ( Серія: Біологія; спец. вип.: Гідроекологія) 
- 6 Kondratuk T. Foraminifera as indicators of environmental stress in marine ecosystems: new evidence from the 
- Romanian and Ukrainian (Black Sea) shelf [Teхt] / T. Kondratuk., V. Yanko-Hombach, S. Kovalishina // Abstract 
- Submission 2015 GSA Annual Meeting: GSA Official Receipt in Baltimore, Maryland, USA : (1-4 November 
- 2015,Baltimore, Maryland, USA) / The Geological Society of America P.O. Box 9140 Boulder, CO 80301, 9140. - 
- Baltimore, Maryland, USA, 2015. - P. 206",Коморін Віктор Миколайович,"Грандова Марія Олександрівна
-Дуднік Дмитро Сергійович
-Качалов Олег Геннадійович
-Ковалішина Светлана Петрівна
-Теренько Галина Вікторівна
-Трет'як Ірина Петрівна
-Український Володимир Васильович",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,mixed,uk,uk
-0317U005120_Head_ Bakhmutov Volodymyr . The model of geophysic.pdf,2017,uk,0317U005120,29-12-2017,відкрита,1,Модель впливу геофізичних чинників на температуру повітря в Антарктиці,11.2017,12.2017,Без звіту,Інститут геофізики ім. С. І. Субботіна НАН України,05417259,,Національна академія наук України,4243105,,"ДУ ""Національний антарктичний науковий центр""",21574751,"бульвар Т. Шевченка, 16, м. Київ, Київська обл., 01601, Україна",Міністерство освіти і науки України,380442463880,"52 - договір з вітчизняною організацією (органами місцевої ради, 
- фондом, асоціацією, концерном тощо)",2.3 - виконання робіт за державними цільовими програмами,7713 - кошти держбюджету,2201410,120,,,Модель впливу геофізичних чинників на температуру повітря в Антарктиці,The model of geophysical factors influence on air temperature in Antarctica,"На основі аналізу побудованих карт розподілу характеристик геомагнітного поля та атмосфери розроблено 
- модель, яка адекватно пояснює особливості змін сучасної температури в Антарктиці - одночасне 
- ""нагрівання"" на заході та ""охолодження"" у центрі та на сході. Вона являє собою ланцюг причинно- 
- наслідкових зв'язків: геомагнітне поле - потік сонячних протонів - концентрація озону - температура та 
- вологість поблизу тропопаузи - приземна температура. Нижча інтенсивність геомагнітного поля у Західній 
- Антарктиці призводить до систематично нижчої концентрації озону та підвищеної вологості на тропопаузі, 
- що сприяє утриманню довгохвильового випромінювання Землі у тропосфері внаслідок парникового ефекту 
- та підвищенню приземної температури. Вища інтенсивність геомагнітного поля та концентрації озону у 
- Центральній та Східній Антарктиці спричинюють підвищення температури та зменшення вологості на рівні 
- тропопаузи, що не перешкоджає поширенню довгохвильового випромінювання від Землі вгору та сприяє 
- охолодженню нижньої тропосфери. Врахування геомагнітного поля як фактора впливу на клімат дозволяє 
- адекватно пояснити знайдені відмінності у Західній і Східній Антарктиці.","The analysis of the created distribution maps of the geomagnetic field and the atmosphere characteristics allowed 
- us to developed a model that adequately explains the changes in the current Antarctic temperature - simultaneous 
- ""heating"" in the west and ""cooling"" in the center and in the east. It is a chain of cause-effect relationships: the 
- geomagnetic field - the flux of solar protons - the concentration of ozone - the temperature and humidity near the 
- tropopause - the surface temperature. The reduced intensity of the geomagnetic field in the Western Antarctica 
- results in a systematically low concentration of ozone and increased humidity on the tropopause, which facilitates 
- the retention of long-wave radiation from the Earth in the troposphere due to the greenhouse effect and an 
- increase of the surface temperature. The increased intensity of the geomagnetic field and ozone concentration in 
- the Central and Eastern Antarctica cause an increase in temperature and a decrease in humidity at the level of the 
- tropopause, which does not prevent the penetration of long-wave radiation from the Earth upwards and causes 
- cooling of the lower troposphere. Taking into account the geomagnetic field as a factor of influence on the climate 
- allows us to adequately explain the found differences in Western and Eastern Antarctica.","550.83, 550.83(99)+ 551.524",37.35.05,Бахмутов Володимир Георгійович,,,,,"Еволюційна геотектонічна модель Західної Антарктики за результатами 
- комплексування тектонофізичних та петромагнітних досліджень району УАС","Evolution geotectonic model of Western Antarctica based on the complexing of 
- tectonophysical and petromagnetic studies of the UAS area",,,Поліпшення стану навколишнього середовища,73 Геофізика,,"Проведено аналітичні дослідження магнітної текстури гірських порід та створено еволюційну 
- геотектонічну модель Західної Антарктики за результатами польових геолого-структурних і 
- тектонофізичних досліджень на геолого-геофізичному полігоні антарктичної станції ""Академік 
- Вернадський"".",,,Не впроваджено,"Національна академія наук України,Державна установа Національний 
- антарктичний науковий центр МОН України","наукові установи, освіта",,,,,,,"1. Мельник Г.В., Бахмутов В.Г., Мозгова Т.О., Шендеровська О.Я. Варіації геомагнітного поля в Антарктиці: 
- особливості та зв'язок з деякими іншими геофізичними явищами. Тези VIIІ Міжнародної Антарктичної 
- Конференції, присвяченої 25-річчю приєднання України до Договору про Антарктику. Київ, 2017. С. 131 2.
-Бахмутов В.Г., Килифарска Н.А., Мельник Г.В. Геомагнитное поле и климат: причинно-следственные связи в 
- изменении некоторых параметров верхней атмосферы. Тези Третьої міжнародної наукової конференції 
- ""Актуальні проблеми геосередовища і зондуючих систем"". Київ, 2017",Старостенко Віталій Іванович,"Мельник Галина Володимирівна
-Мозгова Тамара Олексіївна
-Поляченко Євген Броніславович
-Шендеровська Оксана Ярославівна",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,uk,uk,uk
+0217U003158_1cbaa4e5609fb6517f54f0ab0c205ada.pdf,2017,uk,0217U003158,20-01-2017,відкрита,1,"Високоінформативна медична діагностика ранніх стадій новоутворень на основі нового 
+ тривісьового способу формування картини багатократного розсіяння",03.2015,12.2016,Остаточний звіт,"Інститут металофізики ім. 
+ Г.В.Курдюмова НАН України",05417331,,Національна академія наук України,"044-424-10-05, 044-444-25-61",,"Національна академія наук 
+ України",00019270,"вул. Володимирська, 54, м. Київ, Київська обл., 01030, Україна",Національна академія наук України,"380442396594, 380442343243","34 - договір (замовлення) з центральним органом виконавчої влади, 
+ академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,6541030,513.54,,,"Високоінформативна медична діагностика ранніх стадій новоутворень на основі нового тривісьового 
+ способу формування картини багатократного розсіяння","Highly informative medical diagnosis of early stages of tumors based on the new three-axis method of forming 
+ multiple scattering patterns","В роботі розроблено теоретичні основи динамічного (багатократного) розсіяння і формування 
+ фазоконтрастних зображень некристалічних об'єктів довільної форми. У моделі самоузгоджено враховані 
+ аналітично ефекти (багатократності розсіяння як в об'єкті (зокрема, ефекти заломлення, зміни фази хвилі і 
+ повороту (рефракції) променів, екстинкції за рахунок розсіяння на неоднорідностях і ін., що не описуються в 
+ рамках кінематичної теорії розсіяння), так і в монокристалах монохроматора і аналізатора. Враховано 
+ можливість присутності мікродефектів і макродеформацій у кристалах монохроматора і аналізатора, що 
+ чинить суттєвий вплив на результати діагностики. Розроблено та реалізовано експериментальну схему 
+ формування зображень некристалічних об'єктів та одержано фазоконтрастні зображення модельного 
+ некристалічного об'єкту. Розроблено числові алгоритми для розв'язання задачі інтерпретації зображень 
+ об'єктів на основі проведеного аналізу можливих і достатніх варіацій фази шляхом перебору комбінацій 
+ різних умов експерименту з урахуванням розроблених авторами фазоваріаційних принципів.","It is developed the theoretical basis of dynamic (multiple) scattering and the formation of non-crystalline phase- 
+ contrast images of objects of arbitrary shape. In the model, self-consistently considered analytically the effects of 
+ multiple scattering in the object (eg, refractive effects, changes in the wave phase and rotation (refraction) ray 
+ extinction due to scattering on inhomogeneities et al., which are not described in terms of the kinematic 
+ scattering theory), and in single-crystal monochromator and analyzer. It was taken into account the possibility of 
+ micro-defects and macrodeformation presence in crystals monochromator and analyzer, which has a significant 
+ impact on the diagnostic results. It was developed and implemented an experimental imaging scheme is non- 
+ crystalline objects and obtained non-crystalline phase contrast image of the model object. It was developed 
+ numerical algorithms for the solution of the problem of interpretation of images of objects on the basis of the 
+ analysis of possible and adequate phase variations by trying different combinations of experimental conditions on 
+ the basis of principles developed by the authors fazovariatsiynih.","548.571;548.4, 539.26, 548.4",29.19.11,Молодкін Вадим Борисович,,,,,"Спосіб діагностики ранніх стадій новоутворень на основі нового тривісьового 
+ способу формування картини багатократного розсіяння","The method for diagnosing early stages of tumors based on the new three-axis 
+ method of forming multiple scattering patterns",,,,"М.72.19 - Дослідження й експериментальні розробки у сфері інших природничих і 
+ технічних наук",,"В роботі розроблено теоретичні основи динамічного (багатократного) розсіяння і формування 
+ фазоконтрастних зображень некристалічних об'єктів довільної форми. У моделі самоузгоджено враховані 
+ аналітично ефекти багатократності розсіяння як в об'єкті, так і в монокристалах монохроматора і 
+ аналізатора. Враховано можливість присутності мікродефектів і макродеформацій у кристалах 
+ монохроматора і аналізатора, що чинить суттєвий вплив на результати діагностики. Розроблено та 
+ реалізовано експериментальну схему формування зображень некристалічних об'єктів та одержано 
+ фазоконтрастні зображення модельного некристалічного об'єкту.",,,Не впроваджено,"науково-дослідні установи, медичні установи","Україна, країни СНД та зарубіжжя",,,,,,,"1.V. B. Molodkin, G. O. Velikhovskii, S. V. Lizunova et al. // Materials Science and Engineering Technology, 2016, 47, 
+ pp.246-253, DOI 10.1002/mawe.201600480. 2.В.Б. Молодкін, В.Ю.Сторіжко, С.В. Лізунова та ін., Наносистеми, 
+ наноматеріали, нанотехнології, 2015, 13, №3, с. 469-502. 3.Патент України на винахід №111437, Спосіб фазової 
+ рентгенографії некристалічного об'єкта довільних форми і розмірів, 25.04.2016 р. 4.С. В. Лизунова, Б. В. 
+ Шелудченко, В. Б. Молодкин и др., Металлофиз.новейшие технол., (у друці).",Івасишин Орест Михайлович,"Василик Я.В.
+Дмітрієв С.В.
+Заболотний І.М.
+Карнаухов І.М.
+Кисловський Є.М.
+Неклюдов І.М.
+Оліховський С.Й.
+Скапа Л.М.
+Сторіжко В.Ю.
+Татаренко В.А.",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,empty,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,mixed,uk,uk
+0217U003447_e96560b68b0d11e80e48fb30b5f8b01d.pdf,2017,uk,0217U003447,12-04-2017,відкрита,1,Розробка веб-базованих презентацій на підставі офісного пакета,01.2017,02.2017,Остаточний звіт,"Харківський національний 
+ економічний університет імені Семена Кузнеця",02071211,,Міністерство освіти і науки України,"(057)7020304, (057)7020670",,"Фізична особа-підприємець 
+ Євсєєв Олексій Сергійович",2839212916,", м. Харків, Харківський р-н., Харківська обл., 61166, Україна",,+380677187293,"25 - договір з фізичною особою. Замовником НДР (ДКР) виступає 
+ фізична особа, за рахунок коштів якої виконується робота",2.7 - інше,"7704 - власні кошти, кошти підприємств, установ, організацій, фізичної особи на 
+ виконання ініціативних робіт",,10,,,Методика розробки веб-базованих презентацій,Methods of developing a web-based presentations,"Створення і застосування веб-базованих презентацій в бізнесі можна з великою упевненістю розглядати, як 
+ інноваційну діяльність. Тут заслуговує на увагу два напрями, це просування, продаж товарів і послуг, а також 
+ підвищення кваліфікації персоналу підприємств. У сучасних умовах жорсткої конкуренції особливо 
+ актуальними питаннями для усіх підприємств стають утримання ринкової ніші, просування товарів і послуг 
+ підприємства, залучення нових клієнтів, підвищення конкурентоспроможності. Механізмом діяльності 
+ підприємств на ринку є маркетинг і його основний інструмент - реклама. Зараз підприємства все більше 
+ матеріальних і інтелектуальних засобів вкладають в розвиток маркетингової і рекламної діяльності. Розвитку 
+ рекламної діяльності сприяють Інтернет-технології, які дозволяють ефективно провести рекламну кампанію. 
+ Конкурентно здатність самого підприємства сильно залежить від компетентності і якості підготовки 
+ персоналу. У цих умовах перед будь-яким підприємством встає питання про навчання персоналу і як 
+ наслідок контроль результатів навчання. У роботі показані шляхи вирішення цієї проблеми на основі веб 
+ базованих презентацій.","Creation and use of web-based presentations can be in business with great confidence be considered as 
+ innovation. There are two noteworthy trends, is to promote the sale of goods and services, as well as staff 
+ development companies. In today's highly competitive particularly relevant issues for all enterprises are retaining a 
+ niche market, promote products and services to businesses, attracting new customers, increasing 
+ competitiveness. The mechanism of activity of the enterprises in the market is marketing and its main tool - 
+ advertising. Now businesses are increasingly material and intellectual means to invest in the development of 
+ marketing and promotional activities. Development of promotional activities contribute to Internet technologies 
+ that allow to advertise effectively. Competitive ability of the enterprise itself is strongly dependent on the 
+ competence and quality of training. Under these conditions before any now raises the question of training, and as 
+ a consequence of the control of learning outcomes. The paper shows the ways to solve this problem on the basis of 
+ web-based presentations.5481","004.7; 004.722, 004.774",50.39,Гаврилов Володимир Петрович,,,,,"Веб-базовані презентації у вигляді рекламних банерів, учбових веб 
+ презентацій і онлайн тестів для контролю професійних знань.","Web-based presentations as advertising banners, educational a web presentations 
+ and on-line of tests for control of professional knowledge",,,методичне документація,72.2,,"Веб-базовані презентації представляють із себе звичайні презентації підготовлені в програмі 
+ PowerPoint і надалі конвертовані за допомогою надбудови PowerPoint у формат, який можна розміщувати в 
+ Інтернеті.",,,Впроваджено,великі територіально розподілені підприємства і учбові заклади,сфера реклами і освіти,10,,Ні,Ні,15,1 рік,,Пономаренко Володимир Степанович,"Бріль Тетяна Іванівна
+Гаврилов Володимир Петрович",uk,uk,uk,uk,empty,uk,empty,uk,uk,empty,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,unknown,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,empty,uk,uk
+0217U003660_bb41d7ba746e551cbae52d2aaab4f625.pdf,2017,uk,0217U003660,15-06-2017,відкрита,1,Вдосконалення методів розрахунку механічних систем технологічного обладнання,01.2011,12.2015,Остаточний звіт,"Державний вищий 
+ навчальний заклад ""Український державний хіміко-технологічний університет""",02070758,,Міністерство освіти і науки України,"(0562)47-33-97, (0562)47-33-16",,"Державний вищий 
+ навчальний заклад ""Український державний хіміко-технологічний університет""",02070758,"просп. Гагаріна, 8, м. Дніпро, Дніпропетровський р-н., Дніпропетровська обл., 
+ 49005, Україна",Міністерство освіти і науки України,"380567462706, 380567462668","43 - власна ініціатива (якщо робота виконується з власної ініціативи за 
+ кошти виконавця НДР або безкоштовно)",2.2 - прикладні дослідження і розробки,"7704 - власні кошти, кошти підприємств, установ, організацій, фізичної особи на 
+ виконання ініціативних робіт",,5,,,Вдосконалення методів розрахунку механічних систем технологічного обладнання,Improvement of the calculation methods of technological equipment mechanical systems,"Об’єкт дослідження – пружні муфти, дводвигунові приводи барабанних млинів, станини верстатів. Мета 
+ роботи – розробка методів розрахунку та математичних моделей механічних систем приводів барабанних 
+ млинів, напружено-деформованого стану несучих конструкцій верстатів з метою вдосконалення методів їх 
+ розрахунку. Методи досліджень – розрахункові. Вдосконалено методику розрахунку динамічних 
+ характеристик гідропневмобалонних муфт. Досліджено статику та динаміку приводів барабанних млинів с 
+ двома двигунами. Визначено закономірності розподілення навантаження між двигунами, динаміку пуску та 
+ сталого режиму роботи. З використанням методу скінченних елементів досліджено напружено- 
+ деформований стан станини каландра та принципи зменшення його металоємності при збереженні несучої 
+ здатності. Галузь використання: С 28.1 Виробництво машин і устаткування загального призначення.","Object of research - elastic couplings, two-engine drives of drum mills, columns of machines. The purpose - 
+ development of calculation techniques and mathematical models of drum mill drive mechanical system, the stress 
+ and strain state of machine constructions for the purpose of improvement of their calculation techniques. 
+ Research methods - calculated. The method of calculation of dynamic characteristics of hydropneumatic 
+ couplings is improved. The statics and dynamics of drum mill drives with two engines is investigated. Regularities 
+ of distribution of loading between engines, dynamics of start-up and the set operating mode are defined. With use 
+ of the finite element method the stress and strain state of a calender column and the principles of reduction of its 
+ metal consumption at preservation of the bearing ability is investigated. Use area: С 28.1 Production of machines 
+ and equipment of general purpose.","539.3, 531.3+539.3+678.05; 621.926.5+533.6.011+539.3",30.19.15,Виноградов Борис Володимирович,,,,,Методика розрахунку динамічних характеристик гідропневмобалонних муфт,Calculation technique of dynamic parameters of hydropneumatic clutches,,,,DK 29.14.0,,"Методика розрахунку гідропневмобалонних муфт дозволяє визначити динамічні і статичні її 
+ характеристики, зокрема пружну характеристику та амплітудно-частотну характеристику, для випадків, 
+ коли гумокордні оболонки заповнені рідиною і сполучені з гідропневматичним акумулятором, а також коли 
+ гумокордні оболонки заповнені повітрям та сполучені з додатковим об’ємом повітря. Методика дозволяє 
+ розрахувати нерівномірність розподілу навантаження між двома лініями передач, що містить 
+ гідропневмобалонні муфти, які сполучені між собою загальним трубопроводом. Методика також дозволяє 
+ визначити шляхи компенсації зміщень у механічній системі, обмеження ударних та резонансних динаміних 
+ навантажень.",,,Не впроваджено,підприємства гірничо-видобувної промисловості та енергетики,країни СНД та далекого зарубіжжя,30,,Ні,Ні,60,5 р.,"1. Виноградов, Б.В. Теоретична механіка. Практичні заняття. Електронне тестування. [Текст]. В 2 ч. Ч. 1. / Б.В. 
+ Виноградов, С.І. Немчинов. – Дніпропетровськ: ДВНЗ УДХТУ. – 2014. – 398 с.; 2. Виноградов, Б.В.
+Механический аналог синхронного двигателя [Текст] / Б.В. Виноградов, Д.О, Федин // Науковий вісник НГУ. 
+ – 2012. – № 1. – С. 78-82; 3. Виноградов, Б.В. Статика и динамика приводов барабанних мельниц [Текст] / Б.В. 
+ Виноградов // Науковий вісник НГУ. – 2012. – № 2. – С. 75-80; 4. Виноградов, Б.В. Вынужденные колебания 
+ двухдвигательных приводов барабанних мельниц [Текст] / Б.В. Виноградов, О.В. Христенко // Науковий 
+ вісник НГУ. – 2012. – № 6. - С. 72-77; 5. Виноградов, Б.В. Гидропневмобаллонная упруговязкая система [Текст] 
+ / Б.В. Виноградов // Вібрації в техніці та технологіях. – 2011. – №1(61) – С. 15-19; 6. Виноградов Б.В. О 
+ динамических характеристиках упруговязких систем с резинокордними елементами [Текст] / Вібрації в 
+ техніці та технологіях. – 2011. – №1(61). – С. 20-24; 7. Виноградов, Б.В. Динамические и статические нагрузки в 
+ приводах барабанных мельниц [Текст] / Б.В. Виноградов, А.В. Христенко, Д.А. Федин // Горная автоматика и 
+ электромеханика. - 2013.- № 91.- С. 81-85; 8. Акт впровадження в навчальний процес ДВНЗ УДХТУ від 21.12.15 
+ р.",Харченко Олександр Васильович,"Виноградов Борис Володимирович
+Нємчінов Сергій Ілліч
+Федін Дмитро Олександрович",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,empty,unknown,uk,empty,empty,uk,uk,uk,empty,unknown,unknown,uk,uk,uk
+0217U001928_8b8f66308ee7c3ad5d1031a5721f0753.pdf,2017,uk,0217U001928,20-10-2017,відкрита,1,Підвищення ефективності і ресурсозбереження дорожньо-будівельних машин,09.2016,08.2017,Остаточний звіт,"Харківський національний 
+ автомобільно-дорожній університет",02071168,,Міністерство освіти і науки України,(057) 700-38-76,,"Харківський національний 
+ автомобільно-дорожній університет",02071168,"вулиця Ярослава Мудрого, 25, м. Харків, Харківський р-н., Харківська обл., 61025, 
+ Україна",Міністерство освіти і науки України,0577003862,"43 - власна ініціатива (якщо робота виконується з власної ініціативи за 
+ кошти виконавця НДР або безкоштовно)",2.7 - інше,"7706 - безплатно (договір про науково-технічне співробітництво, тощо)",,,,,Підвищення ефективності і ресурсозбереження дорожньо-будівельних машин,Increase of efficiency and resource saving of road-building machines,"Пропонується підвищення ефективності дорожньо-будівельних машин за рахунок удосконалення 
+ конструкцій та енергозбереження",It is proposed to increase the efficiency of road construction machines by improving designs and energy saving,"69.002.5; 625.7.08; 626.8.002.5, 621.878",55.53,Венцель Євген Сергійович,,,,,"Заходи підвищення ефективності будівельних машин удосконаленням 
+ гідравлічної системи","Measures to improve the efficiency of construction machines by improving the 
+ hydraulic system",,,методика,73.10.2 Дослідження і розробки в галузі технічних наук,,"В роботі застосовувались як теоретичні, так і експериментальні методі досліджень: 
+ випробування натурних зразків, теоретичний опис робочих процесів, моделювання діючих навантажень, 
+ математичне моделювання роботи автогрейдерів, бульдозерів, скреперів, навантажувачів.",,,Впроваджено,"підприємства України, навчальний процес",підприємства України,,,,,,,,Богомолов Віктор Олександрович,"Єфіменко О.
+Іваненко О.
+Ковалевський С.
+Косолапов В.
+Орел О.
+Погребняк А.
+Пімонов І.
+Разарьонов Л.
+Супонев В.
+Холодов А.
+Шевченк В.
+Щербак О.
+Щукін О.
+Ярижко О.",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,uk,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,empty,uk,uk
+0217U006790_b150a8c54f717b966fee06d0b7e49f6f.pdf,2017,uk,0217U006790,21-12-2017,відкрита,1,"Розробка продуктів і раціонів для харчування військовослужбовців в екстремальних умовах 
+ та при проведенні бойових дій з відривом від баз постачання",02.2016,12.2017,Остаточний звіт,"Київський національний 
+ торговельно-економічний університет",01566117,,Міністерство освіти і науки України,(044) 544-74-14,,"Міністерство освіти і науки 
+ України",38621185,"просп. Перемоги, 10, м. Київ, Київська обл., 01135, Україна",Кабінет Міністрів України,"380444813221, 380444814763","34 - договір (замовлення) з центральним органом виконавчої влади, 
+ академією наук (головними розпорядниками бюджетних коштів на проведення НДДКР)",2.2 - прикладні дослідження і розробки,7713 - кошти держбюджету,2201040,420.3,,,"Розробка продуктів і раціонів для харчування військовослужбовців в екстремальних умовах та при 
+ проведенні бойових дій з відривом від баз постачання","Product development and food rations for troops in extreme conditions and during the fighting at a distance from 
+ supply bases","Наукове дослідження спрямоване на вирішення важливої державної проблеми підвищення боєздатності 
+ Збройних Сил України в екстремальних умовах і при проведенні бойових дій з відривом від баз постачання 
+ шляхом розроблення харчових продуктів із заданим нутрієнтним складом, об'ємно-ваговими і 
+ функціональними характеристиками, які відповідають специфічним вимогам їх споживання. Метою 
+ дослідження є розроблення ресурсозберігаючих технологій поліфункціональних білково-вуглеводних 
+ напівфабрикатів та харчової продукції з їх використанням для харчування військовослужбовців в 
+ екстремальних умовах. У науково-дослідній роботі визначено напрями технологічного використання 
+ білоквмісної вітчизняної рибної, молочної, рослинної сировини у виробництві харчових продуктів. На основі 
+ обґрунтування концептуальних засад корекції харчування в екстремальних умовах розроблено технології 
+ харчової продукції з використанням сухих поліфункціональних білково-вуглеводних напівфабрикатів. 
+ Доведено, що розроблені напівфабрикати характеризуються підвищеною харчовою цінністю, мають високу 
+ біодоступність білків, а продукти з їх вмістом - високі споживні та якісні характеристики, здатність до 
+ швидкого відновлення у рідких середовищах, можливість тривалого зберігання, створення продовольчого 
+ резерву. Розроблено технології та рекомендації щодо використання продуктів для нутрітивної підтримки 
+ поранених та хворих військовослужбовців на етапах медичної евакуації, ефективність споживання яких 
+ доведено в умовах клінічної бази Української військово-медичної академії. Розроблено рекомендації щодо 
+ використання у складі раціонів наборів сухих продуктів нової харчової продукції, що сприятиме активізації 
+ адаптаційно-захисних систем організму і дозволить цілеспрямовано впливати на процеси пластичного 
+ забезпечення..","The scientific research is devoted to the solving an important state problem of increasing the combat capability of 
+ the Armed Forces of Ukraine in the extreme conditions and during combat operations at a distance from supply 
+ bases by developing food products with a determined nutrient composition, volume-weight and functional 
+ indicators that meet the specific requirements of their consumption. The aim of the study is to develop the 
+ resource-saving technologies of multifunctional dry fish and plant semi-finished products and food products with 
+ their use for military persons in the extreme conditions. There were determined the directions of technological 
+ use of protein-based domestic fish, dairy, plant raw materials in the production of special food products. On the 
+ basis of the justification of the conceptual principles of nutrition correction in the extreme conditions, the 
+ technologies of food products with the use of dry multifunctional protein-carbohydrate semi-finished products 
+ have been developed. It is proved that the developed semi-finished products have high nutritional value, high 
+ bioavailability of proteins, and products with their content have high consumer and qualitative indicators, the 
+ ability to quickly recover in the liquid systems, the possibility of prolonged storage, the creation of a food reserve. 
+ There were developed the recommendations on the use of products for nutritional support of wounded and sick 
+ military persons during the stages of medical evacuation, the efficiency of which has been proved in the conditions 
+ of the clinical basis of the Ukrainian Military Medical Academy. There were developed the recommendations for 
+ the use of new food products in the diets of dry food products which may contribute to the activation of the
+adaptive-protective systems of the organism and will have a purposeful influence on the processes of plastic 
+ provision.5481","642.5, 642.58.057.36",71.33,Притульська Наталія Володимирівна,,,,,"Технологія харчової продукції для харчування військовослужбовців в 
+ екстремальних умовах та при проведенні бойових дій з відривом від баз постачання","The technology of food products for military persons in the extreme conditions 
+ and during combat operationa at a distance from supply bases",,,,"освіта, харчова промисловість",,"У науково-дослідній роботі обґрунтовано концептуальні засади та напрями аліментарної 
+ корекції харчування військовослужбовців, що перебувають в екстремальних умовах, вимоги та критерії 
+ створення харчових продуктів для підвищення стійкості організму до оксидантного стресу та еколого- 
+ професійного синдрому внаслідок дії комплексу фізичних, психоемоційних і токсичних впливів. Визначено 
+ напрями технологічного використання маловживаної білоквмісної вітчизняної рибної, молочної, рослинної 
+ сировини у виробництві харчових продуктів для військовослужбовців. Розроблено технологію попередньої 
+ підготовки рибо-рослинних фаршів та молочно-рослинних сумішей до сушіння, оптимізовано параметри та 
+ режими сушіння, досліджено показники якості і безпечності розроблених напівфабрикатів, визначено умови 
+ і терміни їх зберігання. Наукова новизна розробки полягає у застосуванні комплексного підходу до 
+ перероблення вітчизняної дрібної рибної сировини (Gobiidae) та вторинних продуктів переробки зернових та 
+ олійних культур в одному те",,,Впроваджено,МОН України,"підприємства харчової промисловості, заклади ресторанного господарства",,,,,,,,Мазаракі Анатолій Антонович,"Антюшко Дмитро Петрович
+Асланян Сергій Арменакович
+Базарова Марина Юріївна
+Гніцевич Вікторія Альбертівна
+Гончар Юлія Миколаївна
+Гуліч Марія Павлівна
+Данилюк Інна Петрівна
+Карпенко Петро Олександрович
+Кочерга Валентина Іванівна
+Кошельник Анна Володимирівна
+Кравченко Михайло Федорович
+Левандовський Леонід Вікторович
+Левицькі Станіслава Олегівна
+Мотузка Юлія Миколаївна
+Мєдвєдєва Анжеліка Олександрівна
+Міклашевська Юлія Богданівна
+Притульська Наталія Володимирівна
+Рибчук Лариса Анатоліївна
+Савкевич Аліна Георгіївна
+Трунова Валерія Дмитрівна
+Федорова Діна Володимирівна
+Фіцак Наталія Петрівна
+Харчевнікова Дар'я Сергіївна
+Хробатенко Олександра Віталіївна
+Юдіна Тетяна Іллівна",uk,uk,uk,uk,empty,uk,empty,uk,uk,uk,uk,uk,uk,uk,en,uk,en,uk,empty,empty,empty,uk,en,empty,empty,empty,uk,uk,empty,empty,uk,uk,uk,empty,empty,empty,empty,uk,uk
