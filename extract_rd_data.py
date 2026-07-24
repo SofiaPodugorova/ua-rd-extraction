@@ -161,6 +161,7 @@ _LABEL_NAMES_WITH_COLON = [
     "Номер етапу", "Назва етапу", "Початок етапу", "Закінчення етапу",
     "Вид звітного документа",
     # Section III + V (shared sub-labels)
+    "Повне найменування юридичної особи (або ПІБ фізичної особи)",
     "Повне найменування юридичної особи", "Код за ЄДРПОУ",
     "Місцезнаходження", "Форма власності", "Сфера управління",
     "Ідентифікатор ROR", "Розмір організації", "Телефон",
@@ -176,7 +177,8 @@ _LABEL_NAMES_WITH_COLON = [
     "Індекс УДК", "Коди тематичних рубрик",
     "Власне Прізвище Ім'я По-батькові",
     "Науковий ступінь", "Наукове звання",
-    "Ідентифікатор ORCHID ID", "Додаткова інформація",
+    "Ідентифікатор ORCID ID", "Ідентифікатор ORCHID ID",
+    "Додаткова інформація",
     # Section VIII
     "Назва НТП українською", "Назва НТП англійською",
     "НТП, яку передбачалося створити",
@@ -262,6 +264,15 @@ def _field(text: str, label: str, multiline: bool = False) -> str:
     return value
 
 
+def _field_any(text: str, labels: list[str], multiline: bool = False) -> str:
+    """Return the first populated value among spelling/layout label variants."""
+    for label in labels:
+        value = _field(text, label, multiline)
+        if value:
+            return value
+    return ""
+
+
 # --- Per-section extractors ---
 
 def parse_section_i(text: str) -> dict:
@@ -287,7 +298,14 @@ def parse_section_ii(text: str) -> dict:
 def parse_section_iii(text: str) -> dict:
     """Section III — performer details: name, EDRPOU, address, ministry, phone."""
     return {
-        "performer_name":     _field(text, "Повне найменування юридичної особи", multiline=True),
+        "performer_name":     _field_any(
+            text,
+            [
+                "Повне найменування юридичної особи (або ПІБ фізичної особи)",
+                "Повне найменування юридичної особи",
+            ],
+            multiline=True,
+        ),
         "performer_edrpou":   _field(text, "Код за ЄДРПОУ"),
         "performer_location": _field(text, "Місцезнаходження", multiline=True),
         "performer_ministry": _field(text, "Сфера управління", multiline=True),
@@ -299,7 +317,7 @@ def parse_section_iii(text: str) -> dict:
 # Section III; first hit per line wins. Used to parse the raw block into a
 # JSON-serialisable list of dicts.
 _CO_PERFORMER_LABELS = [
-    ("name",         "Повне найменування юридичної особи"),
+    ("name",         "Повне найменування юридичної особи (або ПІБ фізичної особи)"),
     ("edrpou",       "Код за ЄДРПОУ"),
     ("location",     "Місцезнаходження"),
     ("ownership",    "Форма власності"),
@@ -322,7 +340,7 @@ def _parse_co_performers_block(body: str) -> str:
         return ""
 
     # Split into per-co-performer chunks on the canonical opener label.
-    opener = "Повне найменування юридичної особи"
+    opener = "Повне найменування юридичної особи (або ПІБ фізичної особи)"
     if opener in body:
         chunks = re.split(rf"(?=^\s*{re.escape(opener)}\b)", body, flags=re.MULTILINE)
         chunks = [c.strip() for c in chunks if c.strip()]
@@ -355,7 +373,14 @@ def parse_section_iv(text: str) -> dict:
 def parse_section_v(text: str) -> dict:
     """Section V — customer details (same structure as the performer)."""
     return {
-        "customer_name":     _field(text, "Повне найменування юридичної особи", multiline=True),
+        "customer_name":     _field_any(
+            text,
+            [
+                "Повне найменування юридичної особи (або ПІБ фізичної особи)",
+                "Повне найменування юридичної особи",
+            ],
+            multiline=True,
+        ),
         "customer_edrpou":   _field(text, "Код за ЄДРПОУ"),
         "customer_location": _field(text, "Місцезнаходження", multiline=True),
         "customer_ministry": _field(text, "Сфера управління", multiline=True),
@@ -388,7 +413,10 @@ def parse_section_vii(text: str) -> dict:
         "pi_name":         _field(text, "Власне Прізвище Ім'я По-батькові", multiline=True),
         "pi_degree":       _field(text, "Науковий ступінь"),
         "pi_title":        _field(text, "Наукове звання"),
-        "pi_orcid":        _field(text, "Ідентифікатор ORCHID ID"),
+        "pi_orcid":        _field_any(
+            text,
+            ["Ідентифікатор ORCID ID", "Ідентифікатор ORCHID ID"],
+        ),
         "additional_info": _field(text, "Додаткова інформація", multiline=True),
     }
 
