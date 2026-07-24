@@ -1,36 +1,30 @@
 # Sample output
 
-`sample_output.csv` contains 5 rows hand-picked from the full
-`data/output_2017.csv` so reviewers can eyeball the extraction quality without
-loading the 12 MB main file in Excel.
+`sample_output.csv` contains five rows from the rebuilt
+`data/output_2017.csv`. It has the same 101-column schema and UTF-8 BOM as
+the full yearly tables.
 
-## Selection
+The rows are selected deterministically from the middle of the populated
+registration months January, April, June, October, and December 2017:
 
-Rows are taken at evenly-spaced positions across the deduplicated, sorted
-file list (`extract_rd_data.collect_unique_files`). The sort key is the full
-PDF path (`data/raw_2017/2017-MM/2017-MM-DD/page_N/<name>.pdf`), so the order
-is quasi-chronological by archive download date — within a single day files
-are alphabetical by `registration_number`, which is why the actual
-`registration_date` of the picked rows does not line up exactly with the
-quartile months.
-
-| CSV index | `registration_date` | Source month |
+| Source row | Registration number | Registration date |
 |---:|---|---|
-| 0    | 03-01-2017 | January  |
-| 379  | 04-05-2017 | May      |
-| 758  | 14-07-2017 | July     |
-| 1137 | 13-10-2017 | October  |
-| 1517 | 29-12-2017 | December |
+| 817 | `0217U003158` | 20-01-2017 |
+| 4064 | `0217U003447` | 12-04-2017 |
+| 4563 | `0217U003660` | 15-06-2017 |
+| 5000 | `0217U001928` | 20-10-2017 |
+| 5671 | `0217U006790` | 21-12-2017 |
 
-Together they span all four quarters of 2017 and a mix of disciplines
-(nano-physics, cultural studies, biology, ecology, geophysics).
+`preview.html` presents the same reports as a transposed, self-contained
+table so that all 101 fields remain readable.
 
 ## Regenerating
 
-After re-running the full pipeline:
+From the repository root:
 
 ```bash
-python -c "import pandas as pd; df = pd.read_csv('data/output_2017.csv', encoding='utf-8-sig', dtype=str).fillna(''); df.iloc[[0,379,758,1137,1517]].to_csv('samples/sample_output.csv', index=False, encoding='utf-8-sig')"
+python samples/build_preview.py
 ```
 
-Same encoding (UTF-8 with BOM) and column layout as the main CSV.
+The script validates the 101-column input, rewrites both sample files, and
+preserves Ukrainian text without mojibake.
