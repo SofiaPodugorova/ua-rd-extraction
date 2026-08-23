@@ -1,8 +1,22 @@
 data/raw_*/
 *.zip
+*.pdf
+*.log
 .venv/
 .ipynb_checkpoints/
 __pycache__/
 .pytest_cache/
 *.pyc
+.nrat_work/
+.nrat_repair_work/
+_progress_check_*.json
+_errors_*.txt
+_repair_*
+_consolidation_report_*.json
+_pre_consolidation_*/
+outputs/
+FINAL_NRAT_*/
+nrat pdfs/
+tmp/
+output_*.csv
 CLAUDE.md

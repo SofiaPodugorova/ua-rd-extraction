@@ -1,327 +1,204 @@
-# UA R&D Reports Extraction Pipeline — 2017–2025
+# UA R&D / NRAT extraction pipeline — 1991–2025
 
-Extracts 50 150 bilingual Ukrainian R&D project report PDFs (UKRISTEI /
-Max Planck Keeper archive, nine yearly batches 2017–2025) into one
-structured CSV per year — 15 244 rows total, with an identical 101-column
-schema in every file (English snake_case, UTF-8 with BOM).
+Проект собирает PDF-карточки Національного репозитарію академічних текстів
+(НРАТ), проверяет полноту годовой выдачи и преобразует PDF в отдельную таблицу
+для каждого года 1991–2025.
 
-## What's in this repo
+В Git хранится только код, тесты и агрегированная документация. Полные PDF,
+ZIP, итоговые таблицы и подробные repair-логи находятся вне репозитория.
 
-| File | What it is |
+## Основные файлы
+
+| Файл | Назначение |
 |---|---|
-| [`extract_rd_data.py`](extract_rd_data.py) | The extraction script (one file, ~700 lines, annotated). |
-| [`requirements.txt`](requirements.txt) | Pinned Python dependencies. |
-| [`data/output_2017.csv`](data/output_2017.csv) … [`data/output_2025.csv`](data/output_2025.csv) | **The results.** One CSV per year batch, 1 136–2 195 rows × 101 columns each — see the [per-year table](#output-files). |
-| [`data/extraction_log.txt`](data/extraction_log.txt), [`data/extraction_log_2018.txt`](data/extraction_log_2018.txt) … [`data/extraction_log_2025.txt`](data/extraction_log_2025.txt) | Per-file extraction logs (the 2017 log keeps its original unsuffixed name). |
-| [`samples/sample_output.csv`](samples/sample_output.csv) | 5 hand-picked rows from the 2017 result (the schema is identical in every year). |
-| [`samples/preview.html`](samples/preview.html) | Same 5 rows as a self-contained HTML page. |
+| `download_nrat_pdfs.py` | Последовательная загрузка и repair-проверка PDF по дням и страницам `pa=1...N`. |
+| `NRAT-Scraping&log-FULL-YEAR-clean.ipynb` | Ноутбук с той же актуальной логикой загрузчика. |
+| `consolidate_nrat_archives.py` | Объединение исходных и repair-ZIP в один проверенный архив года. |
+| `extract_rd_data.py` | Извлечение структурированных полей из одной PDF-карточки. |
+| `build_nrat_tables.py` | Построение 35 полных CSV непосредственно из канонических ZIP. |
+| `validate_nrat_tables.py` | Строгая сверка `doc_id` и строк CSV с PDF в ZIP. |
+| `final_audit_1991_2025.py` | Финальный расчёт сайта, PDF, известных ошибок и таблиц. |
+| `audit_duplicate_publications.py` | Полная проверка всех PDF-вариантов одного `doc_id`. |
+| `make_final_package.py` | Создание единого пользовательского пакета с данными и сгруппированными отчётами. |
+| `AUDIT_1991_2025.md` | Краткий агрегированный итог, пригодный для Git. |
+| `AGENTS.md` | Правила безопасной работы с проектом и публикации в Git. |
 
-Raw PDFs (~gigabytes) are **not** in the repo — only the extracted output.
+## Установка
 
-## Quick look — code and result
-
-You don't have to install anything to inspect what was produced.
-
-**See the result as a table:**
-
-1. Click **[`samples/sample_output.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/samples/sample_output.csv)**
-   on GitHub — small file (5 rows, ~42 KB), GitHub renders it as a sortable
-   table right in the browser.
-2. For a full result, open any year's CSV — e.g.
-   **[`data/output_2017.csv`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/data/output_2017.csv)**
-   — on GitHub and click **"Download raw file"** (top-right) — the files
-   are 10–29 MB so GitHub can't preview them inline. Then double-click the
-   downloaded file: it opens in Excel / Numbers / LibreOffice Calc /
-   Google Sheets with the Ukrainian text intact (UTF-8 BOM is set for
-   exactly this).
-3. Or grab the whole repo at once:
-
-   ```bash
-   git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
-   ```
-
-   …and double-click any `data/output_<year>.csv` locally.
-
-**See the code:** open
-[`extract_rd_data.py`](https://github.com/SofiaPodugorova/ua-rd-extraction/blob/main/extract_rd_data.py)
-on GitHub, or in any text editor / IDE after cloning. The function order
-mirrors the pipeline: PDF → text → sections → fields → language → CSV.
-
-Column meanings and language-detection rules are documented in
-[Output Files](#output-files) below; quirks of the source data are in
-[Known Issues](#known-issues).
-
-## Reproducing the pipeline from scratch
-
-Only needed if you want to **re-run** extraction. Requires **Python 3.10+**
-and the raw PDF archive — the dataset is not in the repo; put the UKRISTEI
-archive folder so that the path `data/raw_<year>/<year>-01/`, …,
-`data/raw_<year>/<year>-12/` exists (e.g. `data/raw_2017/2017-01/`), or
-pass the location via `--data-dir`. The commands below use the 2017 batch
-(the script's defaults); for any other year pass the four per-year
-arguments shown at the end of each block.
-
-### macOS
-
-```bash
-brew install python                            # skip if `python3 --version` ≥ 3.10
-git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
-cd ua-rd-extraction
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# Hook up the dataset — pick ONE of:
-#   (a) put the UKRISTEI archive at ./data/raw_2017/ (so that
-#       ./data/raw_2017/2017-01/, …/2017-12/ exist), then run:
-python extract_rd_data.py --sample 5           # smoke test on 5 files
-python extract_rd_data.py                      # full run, ~1.5–3 min
-
-#   (b) leave the dataset wherever it is and pass --data-dir:
-python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017 --sample 5
-python extract_rd_data.py --data-dir ~/Datasets/ukristei_2017
-
-# Any other year batch — same script, four per-year arguments:
-python extract_rd_data.py --data-dir data/raw_2018 --output data/output_2018.csv \
-    --log data/extraction_log_2018.txt --year 2018
-```
-
-### Windows (PowerShell)
+PowerShell без активации виртуального окружения:
 
 ```powershell
-winget install --id Python.Python.3.12 -e      # skip if `python --version` ≥ 3.10
-git clone https://github.com/SofiaPodugorova/ua-rd-extraction.git
-cd ua-rd-extraction
+cd C:\path\to\ua-rd-extraction
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1                   # if blocked: Set-ExecutionPolicy -Scope Process RemoteSigned
-pip install -r requirements.txt
-
-# Hook up the dataset — pick ONE of:
-#   (a) put the UKRISTEI archive at .\data\raw_2017\ (so that
-#       .\data\raw_2017\2017-01\, …\2017-12\ exist), then run:
-python extract_rd_data.py --sample 5
-python extract_rd_data.py
-
-#   (b) leave the dataset wherever it is and pass --data-dir
-#       (quote paths with spaces / Cyrillic characters):
-python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017" --sample 5
-python extract_rd_data.py --data-dir "D:\datasets\ukristei_2017"
-
-# Any other year batch — same script, four per-year arguments:
-python extract_rd_data.py --data-dir data\raw_2018 --output data\output_2018.csv --log data\extraction_log_2018.txt --year 2018
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-### Linux
+Если PowerShell запрещает `Activate.ps1`, активировать окружение не нужно:
+запускайте `.\.venv\Scripts\python.exe` напрямую, как в примерах ниже.
 
-Same as macOS, replacing `brew install python` with the distro's package
-(`sudo apt install python3 python3-venv python3-pip` on Debian/Ubuntu).
+## Сбор PDF
 
-### CLI options
-
-| Flag | Default | Purpose |
-|---|---|---|
-| `--data-dir` | `data/raw_2017` | Root folder with month subdirectories of PDFs. Use this if the dataset lives outside the project, e.g. `--data-dir "D:\datasets\ukristei_2017"`. |
-| `--output`   | `data/output_2017.csv` | Where to write the resulting CSV. |
-| `--log`      | `data/extraction_log.txt` | Where to write the per-file log. |
-| `--year`     | `2017` | Value written to the `year` column of every row — set it to match the batch, e.g. `--year 2018`. |
-| `--sample N` | `0` (full run) | Process only N evenly-spaced files — handy for a smoke test. |
-
-Defaults reproduce the 2017 batch; the four per-year flags together
-reproduce any other year (see the command blocks above).
-
-### Input folder layout
-
-```
-data/raw_2017/
-├── 2017-01/
-│   └── 2017-01-03/
-│       ├── page_1/0217U000001_Head_… .pdf, …
-│       └── page_2/                ← same reports, deduplicated automatically
-└── 2017-02/ … 2017-12/
+```powershell
+.\.venv\Scripts\python.exe download_nrat_pdfs.py
 ```
 
-Every year batch uses the same layout under its own root
-(`data/raw_2018/2018-01/…`, etc.). Two batches have gaps: the archive
-contains no reports for February–April 2019 and March–April 2020 (see
-Known Issue #9).
+По умолчанию годы обрабатываются от 2025 к 1991. Канонические архивы и рабочие
+данные находятся в соседней папке `..\nrat pdfs`.
 
-Each report appears in 2–13 `page_N/` sub-directories (pagination
-artefact). PDFs differ only in metadata — the extracted text is
-identical — so the script keeps one copy per `registration_number`
-(alphabetically first path). Only `*.pdf` files are read.
+Загрузчик:
 
-## Output Files
+- получает актуальный `_token` с сайта во время запуска и не содержит
+  захардкоженного токена;
+- проходит выдачу по одному дню и использует параметр пагинации `pa`;
+- сохраняет чекпоинт после полностью обработанного дня;
+- автоматически продолжает работу после повторного запуска;
+- не считает пустую или неправильную страницу успешной;
+- не повторяет подтверждённые PDF-ссылки с HTTP 500, но сохраняет их в отчёте;
+- выдерживает паузы между страницами, файлами и днями, чтобы снижать риск
+  блокировки сайтом.
 
-### `data/output_<year>.csv` — one CSV per batch
+Остановить долгий запуск можно сочетанием `Ctrl+C`. Для продолжения достаточно
+повторить ту же команду.
 
-| Batch | Raw PDFs | Rows | Output | Log |
-|---|---:|---:|---|---|
-| 2017 | 4 129 | 1 518 | `output_2017.csv` | `extraction_log.txt` |
-| 2018 | 7 135 | 2 155 | `output_2018.csv` | `extraction_log_2018.txt` |
-| 2019 | 4 875 | 1 490 | `output_2019.csv` | `extraction_log_2019.txt` |
-| 2020 | 4 401 | 1 136 | `output_2020.csv` | `extraction_log_2020.txt` |
-| 2021 | 7 605 | 1 718 | `output_2021.csv` | `extraction_log_2021.txt` |
-| 2022 | 5 112 | 1 171 | `output_2022.csv` | `extraction_log_2022.txt` |
-| 2023 | 6 229 | 1 810 | `output_2023.csv` | `extraction_log_2023.txt` |
-| 2024 | 5 429 | 2 051 | `output_2024.csv` | `extraction_log_2024.txt` |
-| 2025 | 5 235 | 2 195 | `output_2025.csv` | `extraction_log_2025.txt` |
+### Repair-проверка
 
-All nine CSVs share the identical 101-column header in the same order.
-UTF-8 with BOM. One row per unique report (in 2024 and 2025 the archive
-itself lists two reports twice — see Known Issue #10). Free-text fields
-preserve internal newlines as `\n`. Columns by section (the three system
-columns required by the spec — `source_file`, `year`, `language` — sit at
-the front of each row):
+Полный проход от старых лет к новым:
 
-| Section | Columns |
-|---|---|
-| System | `source_file`, `year` (hardcoded per batch), `language` (row-level summary) |
-| I — General info | `registration_number`, `registration_date`, `special_marks` |
-| II — Work stage | `stage_number`, `stage_title`, `stage_start`, `stage_end`, `report_type` |
-| III — Performer | `performer_name`, `performer_edrpou`, `performer_location`, `performer_ministry`, `performer_phone` |
-| IV — Co-performers | `co_performers` (JSON list of dicts, see Issue #3) |
-| V — Customer | `customer_name`, `customer_edrpou`, `customer_location`, `customer_ministry`, `customer_phone` |
-| VI — Funding | `legal_basis`, `funding_direction`, `funding_sources`, `budget_code`, `funding_amount_kgrn`, `funding_amount_usd`, `funding_amount_eur` |
-| **VII — Topic / abstract / PI** | `title_uk`, `title_en`, `abstract_uk`, `abstract_en`, `udc_index`, `thematic_codes`, `pi_name`, `pi_degree`, `pi_title`, `pi_orcid`, `additional_info` |
-| VIII — Sci-tech output (NTP) | `ntp_title_uk`, `ntp_title_en`, `ntp_planned`, `ntp_failure_reasons`, `ntp_results`, `ntp_application_field`, `ntp_card_number`, `ntp_description`, `ntp_socioeconomic`, `ntp_environment`, `ntp_implementation`, `ntp_consumers`, `ntp_markets`, `ntp_invest_amount_kgrn`, `ntp_investor_rights`, `ntp_business_plan`, `ntp_techno_economic_basis`, `ntp_sales_amount_kgrn`, `ntp_payback_years` |
-| IX — Bibliography | `bibliography` |
-| X — Final info | `org_head`, `executors` |
-
-Naming conventions: `performer_*` / `customer_*` disambiguate the identical
-labels in Sections III and V; `pi_*` is the PI sub-block of Section VII;
-`ntp_*` is Section VIII; `_uk` / `_en` mark the Ukrainian / English variants
-of titles and abstracts; `_kgrn` / `_usd` / `_eur` mark funding amounts per
-currency.
-
-In addition, every textual content field gets a companion `lang_<field>`
-column with the detected language. Values: `uk` (≥85 % Cyrillic), `en`
-(≤15 % Cyrillic), `mixed` (0.15–0.85 ratio with ≥40 letters), `unknown`
-(<3 letters), `empty`. The row-level `language` column uses the same
-taxonomy minus `empty` and is derived from pooled text of `title_uk`,
-`abstract_uk`, `stage_title`, `performer_name`, `customer_name`,
-`ntp_description`.
-
-### `data/extraction_log.txt`, `data/extraction_log_<year>.txt`
-
-Per-file log, one per batch (DEBUG+ to file, INFO+ to stdout, truncated
-each run). The 2017 log keeps the original unsuffixed name
-`extraction_log.txt`; later batches are suffixed with the year. Example
-(2017):
-
-```
-2026-05-24 00:08:54 [INFO] Starting extraction from data/raw_2017
-2026-05-24 00:08:54 [INFO] Found 1518 unique reports
-2026-05-24 00:08:54 [DEBUG] EMPTY 0217U000001_… .pdf — performer_location, pi_orcid, …
-2026-05-24 00:08:55 [DEBUG] DONE 0217U000001_… .pdf
-2026-05-24 00:08:55 [WARNING] WARN 0217U007335_… .pdf — empty critical fields: title_uk
-2026-05-24 00:08:55 [ERROR] FAIL 0217U002999_… .pdf — cannot open PDF: …
-2026-05-24 00:09:54 [INFO] Summary -- files: 1518  OK: 1518  WARN: 0  FAIL: 0  -> data/output_2017.csv (1518 rows, 101 cols)
+```powershell
+.\.venv\Scripts\python.exe download_nrat_pdfs.py --repair --oldest-first
 ```
 
-- `EMPTY` — every blank data field in the file (flags un-extractable fields
-  without spamming stdout).
-- `DONE` — record built successfully.
-- `WARN` — at least one critical field empty (`registration_number`,
-  `title_uk`, `title_en`, `abstract_uk`, `abstract_en`, `pi_name`,
-  `performer_name`).
-- `FAIL` — PDF could not be opened or parsing threw. Processing continues
-  with the next file.
+Один год:
 
-### `samples/`
-
-`sample_output.csv` — 5 representative rows (months Jan / May / Jul / Oct /
-Dec, indices 0/379/758/1137/1517). `preview.html` — wide-table HTML view.
-See `samples/README.md` for selection rationale and a regeneration command.
-
-## Known Issues
-
-### 1. Font encoding — solved via HTML extraction
-Plain `get_text("text")` returns garbled Cyrillic because the embedded Lora
-fonts use a non-standard encoding. `get_text("html")` + `html.unescape()`
-recovers correct Unicode without OCR.
-
-### 2. Duplicates across `page_N/` directories
-Each report is mirrored in 2–13 paginated sub-directories. PDFs are
-byte-different (PDF metadata only); extracted text is identical. Script
-deduplicates by `registration_number` — e.g. **1 518 unique reports** out
-of 4 129 raw PDFs in 2017 (per-year counts in [Output Files](#output-files)).
-
-### 3. Section IV — structured JSON when present
-~2–5 % of reports per year list at least one co-performer; the rest leave
-`co_performers` empty. When populated, the cell is a JSON-encoded list of
-dicts with keys `name`, `edrpou`, `location`, `ownership`, `ministry`,
-`ror`, `size`, `phone`, `contribution` (empty sub-fields omitted). If no
-known label matches (unexpected layout), the raw text is kept verbatim
-rather than silently dropped.
-
-```json
-[{"name": "Одеська національна академія харчових технологій",
-  "edrpou": "02071062", "ror": "Не застосовується"}]
+```powershell
+.\.venv\Scripts\python.exe download_nrat_pdfs.py --repair --start-year 2025 --end-year 2025
 ```
 
-### 4. Section IX (bibliography) — often empty
-Present in ~42 % of 2017 reports, rising steadily to ~75 % by 2025.
+Неполный год фиксируется в отчёте, после чего обработка автоматически
+переходит к следующему. Повторный запуск проверяет только незавершённые даты.
 
-### 5. Empty template fields — the form evolves across years
-All 101 columns exist in every batch, but some are rarely filled:
-`pi_orcid`, `additional_info`, `ntp_failure_reasons`, `ntp_card_number`
-are empty in all years; `ntp_planned` / `ntp_environment` first appear in
-2025; `performer_location` / `ntp_socioeconomic` are empty in 2017–2018
-and routinely filled from 2020 on; the five commercial-track NTP fields
-(investment, business plan, techno-economic basis, sales, payback) drop
-to ≤5 % filled from 2021 on.
+Служебные файлы находятся в `..\nrat pdfs`:
 
-### 6. Language detection ladder
-Decision order for `detect_field_language`:
+- `_repair_progress_<год>.json` — чекпоинт по дням и `doc_id`;
+- `_repair_errors_<год>.txt` — ошибки страниц и PDF;
+- `_repair_report_<год>.json` — итог года;
+- `_repair_summary_<начало>_<конец>.json` — общая сводка;
+- `_repair_incomplete_dates_<начало>_<конец>.txt` — незавершённые даты.
 
-1. Empty / whitespace → `empty`.
-2. <3 alphabet characters → `unknown`.
-3. Cyrillic ratio ≥0.85 → `uk`; ≤0.15 → `en`.
-4. Mixed scripts, ≥40 letters → `mixed`.
-5. Borderline short text → `langdetect`; accept `uk`/`en` verbatim, collapse
-   anything else (`ru`, `mk`, `bg`, …) to `mixed`. langdetect routinely
-   misfires to sibling Slavic languages on short Cyrillic strings.
+## Консолидация архивов
 
-`DetectorFactory.seed = 0` at import time keeps the langdetect sampler
-deterministic so the CSV is byte-stable run-to-run.
+```powershell
+.\.venv\Scripts\python.exe consolidate_nrat_archives.py
+```
 
-### 7. Section heading detection
-The Roman-numeral header regex requires a capital Cyrillic letter after the
-numeral (e.g. `III. Відомості про виконавця`), which rejects false matches
-against author initials in the bibliography. Rare lines still sneak past
-via Cyrillic homoglyphs (e.g. `V. Оrobej …` with Cyrillic `О`); since real
-headers always appear in order I → X, the splitter keeps the longest
-strictly-increasing run of numeral matches and drops the rest. Only 5 of
-13 726 documents in 2018–2025 needed this.
+Результат — 35 канонических архивов `..\nrat pdfs\1991.zip` …
+`..\nrat pdfs\2025.zip`. Скрипт сравнивает множества `doc_id`, проверяет CRC,
+удаляет только байтово идентичные повторы и сохраняет отличающиеся варианты.
 
-### 8. Source-data artefacts in the 2017 batch (preserved as-is)
-- `stage_title` of 5 reports starts with a literal `91` prefix (footnote
-  marker not separated from text in the source). One report has
-  `stage_number` = `91` instead of the typical 1–5.
-- `performer_phone` of 36 reports contains alphabetic markers mixed with
-  the digits (Ukrainian `т.` / `факс`, Latin `Tel.` / `Fax`, etc.).
-- `customer_edrpou` non-canonical in 62 / 1 516 non-empty rows: 24 with
-  trailing period, 16 foreign placeholders (`BY000000`, `US000000`, …),
-  22 with non-8-digit length. `performer_edrpou` non-canonical in 4 reports.
-- 59 reports share the identical `udc_index` `006.03; 006.06, 006.03`
-  (duplicated source data).
-- 1 report has Ukrainian text in `title_en`; 2 in `abstract_en`. The
-  `lang_*` columns flag these as `uk` so downstream tooling can spot them.
-- Russian-language fragments occasionally appear inside Ukrainian-labelled
-  fields (e.g. `0217U004886` quotes a Soviet-era standard). The detector
-  reports them as `uk` — it distinguishes Ukrainian vs. English, not vs.
-  Russian (see Issue #6).
-- 9 reports funded in foreign currency use a non-canonical funding-amount
-  label; their amounts are captured in `funding_amount_usd` /
-  `funding_amount_eur`, kept separate from `funding_amount_kgrn`.
+## Построение таблиц
 
-### 9. Months missing from the source archive (2019, 2020)
-The archive has no reports for February–April 2019 and March–April 2020;
-all other batches cover all 12 months.
+```powershell
+.\.venv\Scripts\python.exe build_nrat_tables.py
+.\.venv\Scripts\python.exe validate_nrat_tables.py
+```
 
-### 10. Same report under two filenames (2024, 2025)
-The 2024 and 2025 batches each contain two report pairs with identical
-content but different filenames (`0224U031550`/`0224U031678`,
-`0224U031551`/`0224U031611`, `0225U001455`/`0225U001530`,
-`0225U003627`/`0225U003885`). De-duplication keys on the filename, so each
-pair stays as two identical rows differing only in `source_file`; drop
-duplicates on `registration_number` if needed.
+Результаты находятся вне Git:
+
+```text
+../outputs/nrat_excel_1991_2025/
+├── csv/output_1991.csv ... output_2025.csv
+├── reports/
+└── logs/
+```
+
+Каждый CSV имеет 135 колонок и UTF-8 BOM для открытия в Excel. Одна строка
+соответствует одному уникальному `doc_id`. Если в ZIP находятся несколько
+вариантов, все они проверяются, в строку выбирается лучшая читаемая версия, а
+полный список сохраняется в `source_variants`.
+
+Готовые корректные годы при повторном запуске пропускаются. Для намеренной
+пересборки используйте `--overwrite`.
+
+## Финальный аудит
+
+```powershell
+.\.venv\Scripts\python.exe audit_duplicate_publications.py
+.\.venv\Scripts\python.exe validate_nrat_tables.py
+.\.venv\Scripts\python.exe final_audit_1991_2025.py
+.\.venv\Scripts\python.exe make_final_package.py
+```
+
+Проверенный итог:
+
+- сайт показывает 183 352 публикации;
+- 182 397 `doc_id` текущей выдачи представлены PDF;
+- 356 имеют подтверждённый `no_pdf`;
+- 593 возвращают HTTP 500;
+- ещё 6 позиций есть в счётчике, но отсутствуют в выдаче;
+- в ZIP 183 608 физических PDF-вхождений и 182 622 уникальных `doc_id`;
+- в итоговых CSV ровно 182 622 строки и 182 622 уникальных `doc_id`;
+- проверены все 986 группы PDF-вариантов, настоящих коллизий публикаций нет.
+
+Контрольные формулы:
+
+```text
+182 397 + 356 + 593 + 6 = 183 352
+182 397 + 225 ранее сохранённых = 182 622 уникальных PDF doc_id
+182 622 уникальных doc_id + 986 вариантов = 183 608 PDF-вхождений
+182 622 PDF doc_id = 182 622 строк CSV
+```
+
+Подробности находятся в `AUDIT_1991_2025.md`.
+
+## Финальный пользовательский пакет
+
+`make_final_package.py` создаёт соседнюю папку:
+
+```text
+../FINAL_NRAT_1991_2025/
+├── 01_PDF_DATASET_ZIP/
+├── 02_FINAL_EXCEL_CSV/
+├── 03_REPORTS/
+│   ├── 00_MAIN_SUMMARY/
+│   ├── 01_NO_PDF/
+│   ├── 02_HTTP_500/
+│   ├── 03_LISTING_GAPS/
+│   ├── 04_DUPLICATES/
+│   ├── 05_DAMAGED_PDF/
+│   ├── 06_EXTRACTION_WARNINGS/
+│   ├── 07_ARCHIVE_EXTRAS/
+│   ├── 90_TECHNICAL_VALIDATION/
+│   └── 99_RAW_REPAIR_LOGS/
+├── FINAL_REPORT_1991_2025.md
+└── FINAL_REPORT_1991_2025.json
+```
+
+Большие ZIP и CSV представлены жёсткими ссылками на исходники, поэтому пакет
+не занимает повторно около 46 ГБ.
+
+## Тесты
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+Тесты не выполняют массовый сетевой проход и проверяют восстановление,
+пагинацию, HTTP 500, консолидацию, построение таблиц, финальный аудит и
+классификацию дублей.
+
+## Что не хранится в Git
+
+Старые неправильные `data/output_2017.csv` … `data/output_2025.csv` удалены из
+репозитория. Финальные таблицы также не добавляются в Git из-за размера.
+
+Не коммитить:
+
+- PDF и ZIP;
+- `../nrat pdfs`, `../outputs` и `../FINAL_NRAT_1991_2025`;
+- полные `output_<год>.csv`;
+- repair-чекпоинты и подробные журналы;
+- `.venv`, кэш, временные файлы, токены и cookies.
+
+Для публикации полного набора данных следует использовать отдельное хранилище,
+GitHub Release/Git LFS или репозиторий данных. В обычном Git остаются код,
+тесты, документация и агрегированный аудит.

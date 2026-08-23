@@ -1,8 +1,11 @@
-"""Extract Ukrainian R&D project report PDFs (UKRISTEI archive) into a single
-CSV per year batch for downstream NLP analysis. Defaults target the 2017
-batch; later batches are processed via --data-dir/--output/--log/--year.
-Each PDF is a bilingual form with ten Roman-numeral sections; PyMuPDF's HTML
-mode is used because the embedded Lora font breaks plain-text extraction."""
+"""Parse generated NRAT R&D-card PDFs into structured fields.
+
+This module retains a legacy extracted-directory CLI.  Complete 1991–2025
+tables should be built from canonical annual ZIP files with
+``build_nrat_tables.py``.  Each PDF is a bilingual form with ten Roman-numeral
+sections; PyMuPDF HTML mode is used because embedded fonts can break plain-text
+extraction in older cards.
+"""
 
 import argparse
 import html
@@ -154,16 +157,22 @@ def split_sections(text: str) -> dict[str, str]:
 # Whitelist of "Label:" markers that bound a field value. A heuristic
 # (`[А-ЯІЄЇ][^\n:\d]{1,60}:`) would silently truncate abstracts on phrases
 # like "Об'єкт дослідження:" or "Мета роботи:" — must be explicit.
+ORGANIZATION_NAME_LABEL = "Повне найменування юридичної особи (або ПІБ фізичної особи)"
+ORGANIZATION_NAME_LABEL_LEGACY = "Повне найменування юридичної особи"
+
+
 _LABEL_NAMES_WITH_COLON = [
     # Section I
-    "Державний обліковий номер", "Особливі позначки", "Дата реєстрації",
+    "Державний обліковий номер", "Державний реєстраційний номер",
+    "Особливі позначки", "Дата реєстрації",
     # Section II
     "Номер етапу", "Назва етапу", "Початок етапу", "Закінчення етапу",
     "Вид звітного документа",
     # Section III + V (shared sub-labels)
-    "Повне найменування юридичної особи", "Код за ЄДРПОУ",
+    ORGANIZATION_NAME_LABEL, ORGANIZATION_NAME_LABEL_LEGACY, "Код за ЄДРПОУ",
     "Місцезнаходження", "Форма власності", "Сфера управління",
     "Ідентифікатор ROR", "Розмір організації", "Телефон",
+    "Внесок співвиконавця у звітний етап",
     # Section VI (canonical + foreign-currency variants)
     "Підстава для проведення ДіР", "Напрям фінансування",
     "Код програмної класифікації видатків і кредитування (КПКВК)",
@@ -176,7 +185,7 @@ _LABEL_NAMES_WITH_COLON = [
     "Індекс УДК", "Коди тематичних рубрик",
     "Власне Прізвище Ім'я По-батькові",
     "Науковий ступінь", "Наукове звання",
-    "Ідентифікатор ORCHID ID", "Додаткова інформація",
+    "Ідентифікатор ORCID ID", "Ідентифікатор ORCHID ID", "Додаткова інформація",
     # Section VIII
     "Назва НТП українською", "Назва НТП англійською",
     "НТП, яку передбачалося створити",
@@ -262,14 +271,38 @@ def _field(text: str, label: str, multiline: bool = False) -> str:
     return value
 
 
+def _field_first(text: str, labels: list[str], multiline: bool = False) -> str:
+    """Return the first populated value among equivalent source labels."""
+    for label in labels:
+        value = _field(text, label, multiline=multiline)
+        if value:
+            return value
+    return ""
+
+
+def _organization_name(text: str) -> str:
+    """Extract an organization name without matching the legacy label prefix.
+
+    The legacy label is a literal prefix of the current, longer label.  When a
+    current-form PDF has an intentionally blank organization name, falling
+    through to the legacy pattern would otherwise return the suffix
+    ``(або ПІБ фізичної особи):`` as if it were the name.
+    """
+    current_pattern = _compile_field_pattern(ORGANIZATION_NAME_LABEL, True)
+    if current_pattern.search(text):
+        return _field(text, ORGANIZATION_NAME_LABEL, multiline=True)
+    return _field(text, ORGANIZATION_NAME_LABEL_LEGACY, multiline=True)
+
+
 # --- Per-section extractors ---
 
 def parse_section_i(text: str) -> dict:
     """Section I — general info: registration number, date, special marks."""
     return {
-        "registration_number": _field(text, "Державний обліковий номер"),
-        "special_marks":       _field(text, "Особливі позначки"),
-        "registration_date":   _field(text, "Дата реєстрації"),
+        "registration_number":       _field(text, "Державний обліковий номер"),
+        "state_registration_number": _field(text, "Державний реєстраційний номер"),
+        "special_marks":             _field(text, "Особливі позначки"),
+        "registration_date":         _field(text, "Дата реєстрації"),
     }
 
 
@@ -287,10 +320,13 @@ def parse_section_ii(text: str) -> dict:
 def parse_section_iii(text: str) -> dict:
     """Section III — performer details: name, EDRPOU, address, ministry, phone."""
     return {
-        "performer_name":     _field(text, "Повне найменування юридичної особи", multiline=True),
+        "performer_name":     _organization_name(text),
         "performer_edrpou":   _field(text, "Код за ЄДРПОУ"),
         "performer_location": _field(text, "Місцезнаходження", multiline=True),
+        "performer_ownership": _field(text, "Форма власності", multiline=True),
         "performer_ministry": _field(text, "Сфера управління", multiline=True),
+        "performer_ror":      _field(text, "Ідентифікатор ROR"),
+        "performer_size":     _field(text, "Розмір організації", multiline=True),
         "performer_phone":    _field(text, "Телефон"),
     }
 
@@ -299,7 +335,7 @@ def parse_section_iii(text: str) -> dict:
 # Section III; first hit per line wins. Used to parse the raw block into a
 # JSON-serialisable list of dicts.
 _CO_PERFORMER_LABELS = [
-    ("name",         "Повне найменування юридичної особи"),
+    ("name",         ORGANIZATION_NAME_LABEL),
     ("edrpou",       "Код за ЄДРПОУ"),
     ("location",     "Місцезнаходження"),
     ("ownership",    "Форма власності"),
@@ -322,9 +358,15 @@ def _parse_co_performers_block(body: str) -> str:
         return ""
 
     # Split into per-co-performer chunks on the canonical opener label.
-    opener = "Повне найменування юридичної особи"
+    opener = ORGANIZATION_NAME_LABEL
+    if opener not in body:
+        opener = ORGANIZATION_NAME_LABEL_LEGACY
     if opener in body:
-        chunks = re.split(rf"(?=^\s*{re.escape(opener)}\b)", body, flags=re.MULTILINE)
+        chunks = re.split(
+            rf"(?=^[ \t]*{re.escape(opener)}[ \t]*:)",
+            body,
+            flags=re.MULTILINE,
+        )
         chunks = [c.strip() for c in chunks if c.strip()]
     else:
         chunks = [body]
@@ -333,7 +375,13 @@ def _parse_co_performers_block(body: str) -> str:
     for chunk in chunks:
         record: dict[str, str] = {}
         for key, label in _CO_PERFORMER_LABELS:
-            v = _field(chunk, label, multiline=False)
+            multiline = key in {
+                "name", "location", "ownership", "ministry", "size", "contribution"
+            }
+            labels = [label]
+            if key == "name":
+                labels.append(ORGANIZATION_NAME_LABEL_LEGACY)
+            v = _field_first(chunk, labels, multiline=multiline)
             if v:
                 record[key] = v
         if record:
@@ -355,10 +403,13 @@ def parse_section_iv(text: str) -> dict:
 def parse_section_v(text: str) -> dict:
     """Section V — customer details (same structure as the performer)."""
     return {
-        "customer_name":     _field(text, "Повне найменування юридичної особи", multiline=True),
+        "customer_name":     _organization_name(text),
         "customer_edrpou":   _field(text, "Код за ЄДРПОУ"),
         "customer_location": _field(text, "Місцезнаходження", multiline=True),
+        "customer_ownership": _field(text, "Форма власності", multiline=True),
         "customer_ministry": _field(text, "Сфера управління", multiline=True),
+        "customer_ror":      _field(text, "Ідентифікатор ROR"),
+        "customer_size":     _field(text, "Розмір організації", multiline=True),
         "customer_phone":    _field(text, "Телефон"),
     }
 
@@ -376,6 +427,39 @@ def parse_section_vi(text: str) -> dict:
     }
 
 
+_RESEARCH_LEADER_LABELS = [
+    ("name", "Власне Прізвище Ім'я По-батькові"),
+    ("degree", "Науковий ступінь"),
+    ("title", "Наукове звання"),
+    ("orcid", "Ідентифікатор ORCID ID"),
+    ("additional_info", "Додаткова інформація"),
+]
+
+
+def _parse_research_leaders(text: str) -> str:
+    """Return every Section VII research leader as a JSON list."""
+    opener = "Власне Прізвище Ім'я По-батькові"
+    chunks = re.split(rf"(?=^[ \t]*{_escape_label(opener)}[ \t]*:)", text, flags=re.MULTILINE)
+    records: list[dict[str, str]] = []
+    for chunk in chunks:
+        if opener not in chunk:
+            continue
+        record: dict[str, str] = {}
+        for key, label in _RESEARCH_LEADER_LABELS:
+            if key == "orcid":
+                value = _field_first(
+                    chunk,
+                    ["Ідентифікатор ORCID ID", "Ідентифікатор ORCHID ID"],
+                )
+            else:
+                value = _field(chunk, label, multiline=key in {"name", "additional_info"})
+            if value:
+                record[key] = value
+        if record:
+            records.append(record)
+    return json.dumps(records, ensure_ascii=False) if records else ""
+
+
 def parse_section_vii(text: str) -> dict:
     """Section VII — topic, abstract, PI: titles/abstracts UK+EN, UDC, PI details."""
     return {
@@ -388,8 +472,11 @@ def parse_section_vii(text: str) -> dict:
         "pi_name":         _field(text, "Власне Прізвище Ім'я По-батькові", multiline=True),
         "pi_degree":       _field(text, "Науковий ступінь"),
         "pi_title":        _field(text, "Наукове звання"),
-        "pi_orcid":        _field(text, "Ідентифікатор ORCHID ID"),
+        "pi_orcid":        _field_first(
+            text, ["Ідентифікатор ORCID ID", "Ідентифікатор ORCHID ID"]
+        ),
         "additional_info": _field(text, "Додаткова інформація", multiline=True),
+        "research_leaders": _parse_research_leaders(text),
     }
 
 
@@ -407,6 +494,8 @@ def parse_section_viii(text: str) -> dict:
         "ntp_socioeconomic":         _field(text, "Соціально-економічна спрямованість НТП", multiline=True),
         "ntp_environment":           _field(text, "Вплив НТП на довкілля", multiline=True),
         "ntp_implementation":        _field(text, "Впровадження НТП"),
+        "ntp_implementation_start":  _field(text, "Початок етапу"),
+        "ntp_implementation_end":    _field(text, "Закінчення етапу"),
         "ntp_consumers":             _field(text, "Споживачі продукції", multiline=True),
         "ntp_markets":               _field(text, "Перспективні ринки", multiline=True),
         "ntp_invest_amount_kgrn":    _field(text, "Потрібний обсяг інвестицій, тис. грн."),
@@ -415,6 +504,7 @@ def parse_section_viii(text: str) -> dict:
         "ntp_techno_economic_basis": _field(text, "Техніко-економічне обгрунтування", multiline=True),
         "ntp_sales_amount_kgrn":     _field(text, "Потенціальний обсяг продажу, тис. грн."),
         "ntp_payback_years":         _field(text, "Очікуваний термін окупності (років)"),
+        "ntp_additional_info":       _field(text, "Додаткова інформація", multiline=True),
     }
 
 
@@ -432,7 +522,17 @@ def parse_section_x(text: str) -> dict:
     """
     m_head = re.search(r"Керівник[ \t]+юридичної[ \t]+особи[ \t]*\n", text)
     m_exec = re.search(r"Перелік[ \t]+осіб-виконавців[ \t]*\n", text)
-    m_foot = re.search(r"Відповідальний[ \t]+за[ \t]+підготовку", text)
+    m_foot = re.search(
+        r"Відповідальний[ \t]+за[ \t]+підготовку"
+        r"(?:[ \t]*\n[ \t]*облікових[ \t]+документів)?",
+        text,
+    )
+    m_phone = re.search(r"(?m)^[ \t]*Телефон[ \t]*$", text)
+    m_registrar = re.search(r"(?m)^[ \t]*Реєстратор[ \t]*$", text)
+
+    def clean_block(block: str) -> str:
+        lines = [line.strip() for line in block.splitlines()]
+        return "\n".join(line for line in lines if line)
 
     org_head = ""
     if m_head:
@@ -441,22 +541,39 @@ def parse_section_x(text: str) -> dict:
             else m_foot.start() if m_foot
             else len(text)
         )
-        block = text[m_head.end():end_head]
-        for ln in block.splitlines():
-            ln = ln.strip()
-            if ln:
-                org_head = ln
-                break
+        org_head = clean_block(text[m_head.end():end_head])
 
     executors = ""
     if m_exec:
         end_exec = m_foot.start() if m_foot else len(text)
-        block = text[m_exec.end():end_exec]
-        lines = [ln.strip() for ln in block.splitlines()]
-        lines = [ln for ln in lines if len(ln) >= 3]
-        executors = "\n".join(lines)
+        executors = clean_block(text[m_exec.end():end_exec])
 
-    return {"org_head": org_head, "executors": executors}
+    document_preparer = ""
+    if m_foot:
+        end_preparer = (
+            m_phone.start() if m_phone and m_phone.start() > m_foot.end()
+            else m_registrar.start() if m_registrar and m_registrar.start() > m_foot.end()
+            else len(text)
+        )
+        document_preparer = clean_block(text[m_foot.end():end_preparer])
+
+    document_preparer_phone = ""
+    if m_phone:
+        end_phone = (
+            m_registrar.start()
+            if m_registrar and m_registrar.start() > m_phone.end()
+            else len(text)
+        )
+        document_preparer_phone = clean_block(text[m_phone.end():end_phone])
+
+    registrar = clean_block(text[m_registrar.end():]) if m_registrar else ""
+    return {
+        "org_head": org_head,
+        "executors": executors,
+        "document_preparer": document_preparer,
+        "document_preparer_phone": document_preparer_phone,
+        "registrar": registrar,
+    }
 
 
 # --- Language detection ---
@@ -466,20 +583,21 @@ def parse_section_x(text: str) -> dict:
 # language detection on them is meaningless.
 TEXT_FIELDS = [
     "stage_title", "special_marks", "report_type",
-    "performer_name", "performer_location", "performer_ministry",
+    "performer_name", "performer_location", "performer_ownership",
+    "performer_ministry", "performer_size",
     "co_performers",
-    "customer_name", "customer_location", "customer_ministry",
+    "customer_name", "customer_location", "customer_ownership",
+    "customer_ministry", "customer_size",
     "legal_basis", "funding_direction", "funding_sources",
     "title_uk", "title_en", "abstract_uk", "abstract_en",
-    "pi_name", "pi_degree", "pi_title", "additional_info",
+    "pi_name", "pi_degree", "pi_title", "additional_info", "research_leaders",
     "ntp_title_uk", "ntp_title_en",
     "ntp_planned", "ntp_failure_reasons",
     "ntp_results", "ntp_application_field",
     "ntp_description", "ntp_socioeconomic", "ntp_environment",
-    "ntp_implementation", "ntp_consumers", "ntp_markets",
+    "ntp_implementation", "ntp_consumers", "ntp_markets", "ntp_additional_info",
     "ntp_investor_rights", "ntp_business_plan", "ntp_techno_economic_basis",
-    "bibliography",
-    "org_head", "executors",
+    "bibliography", "org_head", "executors", "document_preparer", "registrar",
 ]
 
 # Pooled text of these fields determines the row-level `language` column.
@@ -536,36 +654,39 @@ SYSTEM_COLUMNS = ["source_file", "year", "language"]
 
 DATA_COLUMNS = [
     # Section I
-    "registration_number", "registration_date", "special_marks",
+    "registration_number", "state_registration_number", "registration_date", "special_marks",
     # Section II
     "stage_number", "stage_title", "stage_start", "stage_end", "report_type",
     # Section III
-    "performer_name", "performer_edrpou", "performer_location", "performer_ministry", "performer_phone",
+    "performer_name", "performer_edrpou", "performer_location", "performer_ownership",
+    "performer_ministry", "performer_ror", "performer_size", "performer_phone",
     # Section IV
     "co_performers",
     # Section V
-    "customer_name", "customer_edrpou", "customer_location", "customer_ministry", "customer_phone",
+    "customer_name", "customer_edrpou", "customer_location", "customer_ownership",
+    "customer_ministry", "customer_ror", "customer_size", "customer_phone",
     # Section VI
     "legal_basis", "funding_direction", "funding_sources", "budget_code",
     "funding_amount_kgrn", "funding_amount_usd", "funding_amount_eur",
     # Section VII
     "title_uk", "title_en", "abstract_uk", "abstract_en",
     "udc_index", "thematic_codes",
-    "pi_name", "pi_degree", "pi_title", "pi_orcid", "additional_info",
+    "pi_name", "pi_degree", "pi_title", "pi_orcid", "additional_info", "research_leaders",
     # Section VIII
     "ntp_title_uk", "ntp_title_en",
     "ntp_planned", "ntp_failure_reasons",
     "ntp_results", "ntp_application_field",
     "ntp_card_number",
     "ntp_description", "ntp_socioeconomic", "ntp_environment",
-    "ntp_implementation", "ntp_consumers", "ntp_markets",
+    "ntp_implementation", "ntp_implementation_start", "ntp_implementation_end",
+    "ntp_consumers", "ntp_markets",
     "ntp_invest_amount_kgrn", "ntp_investor_rights",
     "ntp_business_plan", "ntp_techno_economic_basis",
-    "ntp_sales_amount_kgrn", "ntp_payback_years",
+    "ntp_sales_amount_kgrn", "ntp_payback_years", "ntp_additional_info",
     # Section IX
     "bibliography",
     # Section X
-    "org_head", "executors",
+    "org_head", "executors", "document_preparer", "document_preparer_phone", "registrar",
 ]
 
 CSV_COLUMNS = SYSTEM_COLUMNS + DATA_COLUMNS + [f"lang_{f}" for f in TEXT_FIELDS]
